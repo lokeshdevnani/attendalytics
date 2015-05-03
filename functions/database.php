@@ -15,3 +15,7 @@ try{
     echo 'Sorry, Could not connect to the database this moment. Try again later';
     exit;
 }
+
+function pr($arr){
+    echo "<pre>",print_r($arr,1),"</pre>";
+}

@@ -1,6 +1,8 @@
 <?php
 class Attendance {
     protected $db;
+    protected $rollStart,$rollEnd;
+    protected $absenteeCount;
 
     public function __construct(PDO $db){
         $this->db = $db;
@@ -30,6 +32,22 @@ class Attendance {
         }
 
     }
+    public function getRollRange($classId){
+        $p = $this->db->prepare("SELECT rollStart,rollEnd FROM classes WHERE id=? ");
+        $p->execute(array($classId));
+        $rolls = $p->fetchObject();
+        if(!$rolls) return false;
+        $this->rollStart = $rolls->rollStart;
+        $this->rollEnd = $rolls->rollEnd;
+    }
+
+    public function getRollStart(){
+        return $this->rollStart;
+    }
+
+    public function getRollEnd(){
+        return $this->rollEnd;
+    }
 
     public function getByLectureId($lectureId = 29){
         $p = $this->db->prepare("SELECT rollStart,rollEnd FROM classes WHERE id IN (SELECT classId FROM lectures WHERE id=? )");
@@ -57,8 +75,33 @@ class Attendance {
         }
     }
 
+    public function getAbsenteeCount(){
+        return $this->absenteeCount;
+    }
+
+    public function getByLectureId2($lectureId = 29){
+
+        $q = $this->db->prepare("SELECT rollno FROM absentees WHERE lectureId = ? ORDER BY rollno");
+        $q->execute(array($lectureId));
+        $arr = $q->fetchAll(PDO::FETCH_COLUMN,"rollno");
+
+        $k=0;
+        $arr_length = count($arr);
+        $this->absenteeCount = $arr_length;
+
+        $res = array();
+        for($i=$this->rollStart;$i<=$this->rollEnd;$i++){
+            if($arr_length>$k && $arr[$k]==$i){
+                $res[]='A';
+                $k++;
+            }else{
+                $res[]='P';
+            }
+        }
+        return $res;
+    }
+
    public function getAllLecturesForClass($classId = 1,$subjectId = 3){
-        echo "Getting lectures wait... <br>";
         $q = $this->db->prepare("SELECT id,teacherId,time FROM lectures WHERE classId = ? AND subjectId = ?");
         $q->execute(array($classId,$subjectId));
         $lectureList = $q->fetchAll(PDO::FETCH_OBJ);
