@@ -102,13 +102,18 @@ class Attendance {
     }
 
    public function getAllLecturesForClass($classId = 1,$subjectId = 3){
-        $q = $this->db->prepare("SELECT id,teacherId,time FROM lectures WHERE classId = ? AND subjectId = ?");
+        $q = $this->db->prepare("SELECT id,teacherId,time FROM lectures WHERE classId = ? AND subjectId = ? ORDER BY time DESC");
         $q->execute(array($classId,$subjectId));
         $lectureList = $q->fetchAll(PDO::FETCH_OBJ);
         return $lectureList;
    }
 
-
+    public function getNamesForClass($classId){
+        $q = $this->db->prepare("SELECT name FROM classes WHERE classId = ?");
+        $q->execute(array($classId));
+        $lectureList = $q->fetchAll(PDO::FETCH_COLUMN,"name");
+        return $lectureList;
+    }
 
 
 
