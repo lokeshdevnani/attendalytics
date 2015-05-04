@@ -8,7 +8,7 @@
   </div>
   <div class="row">
      <div class="container">
-
+        <div id="dateRanger"></div>
      </div>
   </div>
 
@@ -35,11 +35,15 @@
 
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="css/ion.rangeSlider.css" rel="stylesheet" />
+<link href="css/ion.rangeSlider.skinHTML5.css" rel="stylesheet" />
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap.js"></script>
+<script src="js/ion.rangeSlider.min.js"></script>
 
 <script>
+    var wholeData;
     $(document).ready(function(){
 
         function formatTime(time){
@@ -56,12 +60,14 @@
             success : function(result){
                 console.log(result);
                 // adding the thead headers
+                var lectureDates = [];
                 var tr2data = "";
                 var tr3data = "";
                 $.each(result.lectureList,function(index,lecture){
 
                     tr2data += ("<th><a>" + formatTime(lecture.time) + "</a></th>");
                     tr3data += ("<th><a>" +lecture.present+ "</a></th>");
+                    lectureDates.push(formatTime(lecture.time));
                 });
                 $("#sheet > thead > tr:first-of-type #th-present").attr('colspan', result.lectureList.length );
                 $("#sheet > thead > tr:nth-of-type(2)").html(tr2data);
@@ -69,6 +75,8 @@
 
                 //done !! now just load the rows
                 loadData(result.data, result.lectureCount);
+                createRanger(lectureDates);
+                wholeData = result;
             }
         });
     });
@@ -120,11 +128,59 @@
         });
     }
 
-    function toggleColumnVisibility(num){
+    function toggleColumnVisibility(num,show){
+        // show-> { show:1,hide:0 }
         var api = $("#sheet").DataTable();
         var column = api.column(num);
-        column.visible(!column.visible());
+        column.visible(show);
     }
+    function createRanger(lectureDates){
+
+        $("#dateRanger").ionRangeSlider({
+            type: "double",
+            values: lectureDates,
+            onStart: function (data) {
+                //console.log(data);
+            },
+            onChange : function (data) {
+                from = data.from;
+                to = data.to;
+                for(i=3;i<from;i++) toggleColumnVisibility(i,false);
+                for(i=from;i<=to;i++) toggleColumnVisibility(i,true);
+                for(i=to+1;i<lectureDates.length+3;i++) toggleColumnVisibility(i,false);
+                updateAttended(from,to);
+            },
+            onFinish : function (data) {
+                //console.log(data);
+            },
+            onUpdate : function (data) {
+                //console.log(data);
+            }
+        });
+    }
+    function getUpdatedAttendedValues(from,to){
+        var results = wholeData.data;
+        var newSum = [];
+        for(r=0;r<results.length;r++){
+            sum=0;
+            for(i=from;i<=to;i++){
+                if(results[r][i]=='P') sum++;
+            }
+            newSum[r]=sum;
+        }
+        return newSum;
+    }
+    function updateAttended(from,to){
+        var api = $("#sheet").DataTable();
+        var myColumn = api.column(2);
+        var newAttended = getUpdatedAttendedValues(from,to);
+        nodes = myColumn.nodes().to$().each(function(index,value){
+            $(this).html(newAttended[index]);
+        });
+
+    }
+
+// show classes between rangestopper
 
 
 
