@@ -13,46 +13,40 @@ $classId = 2;
 $subjectId = 2;
 $att = new Attendance($db);
 $result = array();
-$values = array();
+$dateColumns = array();
+$summary = array();
+
 
 $lectureList = $att->getAllLecturesForClass($classId,$subjectId);
 $lectureCount = count($lectureList);
-$att->getRollRange($classId);
 
+$att->getRollRange($classId);
 $rollStart = $att->getRollStart();
 $rollEnd = $att->getRollEnd();
 $totalStudents = $rollEnd - $rollStart + 1;
 
 foreach($lectureList as $index=>$lecture){
-    $lec = $att->getByLectureId2($lecture->id);
-    $values[] = $lec;
+    $dateColumns[] = $att->getByLectureId2($lecture->id);
     $lectureList[$index]->present = $totalStudents - $att->getAbsenteeCount();
 }
 
-//pr($values);
-//die();
-//echo "<pre>";
-//echo (json_encode($values));
-//echo "</pre>";
-//pr($att->getByLectureId(27));
-//$att->getByLectureId2();
-//pr($att->getNamesForClass($classId));
-
-for($i=0;$i<=$totalStudents-1;$i++)
+for($i=0;$i<$totalStudents;$i++)
 {
+    // filling a record with student's name,rollno and {P/A} for all dates in LectureList
     $t = array();
     $t['P'] = 0;
-    foreach($values as $value) {
+    foreach($dateColumns as $value) {
         $t[] = $value[$i];
-        $value[$i]=='P' && $t['P']++;
-
+        $value[$i]=='P' && $t['P']++;      // if present... increment the present counter for that student
+        // the above line tracks the no. of P's of the $i'th student
     }
     $t['name'] = rand(5,99);
     $t['roll'] = $i+$rollStart;
-    $result[$i]  = $t;
+    $result[$i]  = $t;   // result for i'th student stored in $result array.
 }
 
+
+$json['summary'] = $att->getSummary($classId,$subjectId);
 $json['data']= $result;
-$json['lectureCount'] = $lectureCount;
 $json['lectureList']= $lectureList;
 echo json_encode($json);
