@@ -8,45 +8,26 @@ require_once 'functions/Attendance.php';
  *
  */
 
+$p = $db->prepare("SELECT firstname FROM first ORDER BY rand() LIMIT 240");
+$p->execute();
+$firstnames = $p->fetchAll(PDO::FETCH_COLUMN,'firstname');
+sort($firstnames);
+
+$p = $db->prepare("SELECT lastname FROM last ORDER BY rand() LIMIT 240");
+$p->execute();
+$lastnames = $p->fetchAll(PDO::FETCH_COLUMN,'lastname');
+
+$p = $db->prepare("INSERT INTO students (name,classId,remarks) VALUES(?,?,?)");
+$remarks = ["Very Poor","Good","Excellent","Very Good","Average Student"];
+for($i=0;$i<240;$i++){
+    echo $name = $firstnames[$i]." ".$lastnames[$i];
+    echo "<br>";
+    $p->execute(array($name,intval($i/68)+1,$remarks[rand(0,4)]));
+}
+
+
 
 $classId = 2;
 $subjectId = 2;
 $att = new Attendance($db);
-$result = array();
-$dateColumns = array();
-$summary = array();
-
-
-$lectureList = $att->getAllLecturesForClass($classId,$subjectId);
-$lectureCount = count($lectureList);
-
-$att->getRollRange($classId);
-$rollStart = $att->getRollStart();
-$rollEnd = $att->getRollEnd();
-$totalStudents = $rollEnd - $rollStart + 1;
-
-foreach($lectureList as $index=>$lecture){
-    $dateColumns[] = $att->getByLectureId2($lecture->id);
-    $lectureList[$index]->present = $totalStudents - $att->getAbsenteeCount();
-}
-
-for($i=0;$i<$totalStudents;$i++)
-{
-    // filling a record with student's name,rollno and {P/A} for all dates in LectureList
-    $t = array();
-    $t['P'] = 0;
-    foreach($dateColumns as $value) {
-        $t[] = $value[$i];
-        $value[$i]=='P' && $t['P']++;      // if present... increment the present counter for that student
-        // the above line tracks the no. of P's of the $i'th student
-    }
-    $t['name'] = rand(5,99);
-    $t['roll'] = $i+$rollStart;
-    $result[$i]  = $t;   // result for i'th student stored in $result array.
-}
-
-
-$json['summary'] = $att->getSummary($classId,$subjectId);
-$json['data']= $result;
-$json['lectureList']= $lectureList;
-echo json_encode($json);
+//echo json_encode($json);

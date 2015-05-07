@@ -1,40 +1,52 @@
+<html>
+<head>
+    <title>JECRC Attendance Register</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="css/ion.rangeSlider.css" rel="stylesheet" />
+    <link href="css/ion.rangeSlider.skinHTML5.css" rel="stylesheet" />
+</head>
 <body>
 <div class="container">
-
-  <div class="row">
+  <div class="row" style="background:#08c;">
      <div class="container">
-        <h1>ATTENDANCE</h1>
+        <h1 class="mainHeading">ATTENDANCE</h1>
+         <?php
+            if(isset($_GET['class']) && isset($_GET['subject'])){
+                if(!empty($_GET['class']) && !empty ($_GET['subject'])){
+                    $class = $_GET['class'];
+                    $subject= $_GET['subject'];
+                    echo "<span class=hidden id=class>$class</span>";
+                    echo "<span class=hidden id=subject>$subject</span>";
+                }
+            }
+         ?>
      </div>
   </div>
-  <div class="row">
-     <div class="container">
-        <div id="dateRanger"></div>
-     </div>
-  </div>
-  <div class="row headSubjectR">
+  <div class="row headSubjectR" style="background:#08c;">
       <div class="container">
-        <div class="col-md-3 leftportion summaryData">
-            <span class="className"></span>
-            <span class="subjectName"></span>
-            <span class="teacherName"></span>
+        <div class="col-md-4 leftportion summaryData">
+            Class: <span class="className"></span>
+            <br>Subject :<span class="subjectName"></span>
+            <br>Teacher: <span class="teacherName"></span>
         </div>
-        <div class="col-md-3 middleportion summaryData constantData">
-            <span class="fromDate"></span> to <span class="toDate"></span>
-            <span class="totalDates"></span>
-            <span class="percentAttendance"></span>
+        <div class="col-md-4 middleportion summaryData constantData">
+            From <span class="fromDate"></span> to <span class="toDate"></span>
+            <br>Total Lectures : <span class="totalDates"></span>
+            <br>Total Percentage: <span class="percentAttendance"></span>%
         </div>
-        <div class="col-md-3 rightportion summaryData variableData">
-            <span class="fromDate"></span> to <span class="toDate"></span>
-            <span class="totalDates"></span>
-            <span class="percentAttendance"></span>
+        <div class="col-md-4 rightportion summaryData variableData">
+            From <span class="fromDate"></span> to <span class="toDate"></span>
+            <br>Total Lectures : <span class="totalDates"></span>
+            <br>Total Percentage: <span class="percentAttendance"></span>%
         </div>
       </div>
   </div>
-  <div class="table-responsive">
-     <table class="table table-striped table-bordered table-condensed table-hover" cellspacing="0" width="100%" id="sheet">
+  <div class="table-responsive" id="tableContainer">
+     <table class="table table-bordered table-condensed table-hover" cellspacing="0" width="100%" id="sheet">
         <thead>
             <tr>
-                <th rowspan="2">Roll</th>
+                <th rowspan="2"><i class="glyphicon glyphicon-chevron-down"></i></th>
                 <th rowspan="2">Name</th>
                 <th rowspan="2">Present</th>
             </tr>
@@ -45,19 +57,18 @@
      </table>
   </div>
 </div>
-</body>
-
-<link href="css/bootstrap.min.css" rel="stylesheet" />
-<link href="css/dataTables.bootstrap.css" rel="stylesheet" />
-<link href="css/ion.rangeSlider.css" rel="stylesheet" />
-<link href="css/ion.rangeSlider.skinHTML5.css" rel="stylesheet" />
+<!-- js includes -->
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap.js"></script>
 <script src="js/ion.rangeSlider.min.js"></script>
+<!-- js includes end -->
+</body>
+</html>
 
 <script>
     var wholeData;
+    var api;
 
     function formatTime(time){
         var shortMonths= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -76,9 +87,13 @@
     }
 
     $(document).ready(function(){
+        var Class = $("#class").html();
+        var subject = $("#subject").html();
+        var params = {classId: Class, subjectId: subject};
         $.ajax({
-            url: "test.php",
+            url: "subjectwise.php",
             dataType : "json",
+            data: params,
             success : function(result){
                 console.log(result);
                 // adding the thead headers
@@ -88,7 +103,7 @@
                 var totalAtt=0;
                 $.each(result.lectureList,function(index,lecture){
 
-                    tr2data += ("<th><a>" + formatTime(lecture.time)+" "+ index + "</a></th>");
+                    tr2data += ("<th><a data-id='" + index + "'>" + formatTime(lecture.time)+" " + "</a></th>");
                     tr3data += ("<th><a>" +lecture.present+ "</a></th>");
                     lectureDates.push(formatTime(lecture.time));
                     totalAtt += lecture.present;
@@ -128,13 +143,18 @@
         lectureCount = wholeData.lectureList.length;
         var columns = [
             { data: 'roll' },
-            { data: 'name' },
-            { data: 'P' }
+            { data: 'name',width:"25%",sClass:"nameRow" },
+            { data: 'P',"orderDataType": "dom-text-numeric" }
         ];
         for(i=0;i<lectureCount;i++){
             columns.push({data: [i]});
         }
-
+        $.fn.dataTable.ext.order['dom-text-numeric'] = function  ( settings, col )
+        {
+            return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
+                return $(td).html();
+            } );
+        }
         $('#sheet').dataTable( {
             data: data,
             columns: columns,
@@ -145,13 +165,37 @@
             },
             "fnDrawCallback": function( oSettings ) {
                         applyEffects();
-            }
+            },
+            'language': {
+                search: '<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>',
+                searchPlaceholder: 'Search here',
+                lengthMenu: '<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>_MENU_</div>'
+            },
+            columnDefs : [
+                {
+                    "targets": 2,
+                    "render": function(data,type,row,meta){
+                        return "<span class='present" + meta.row + "'>" + data + "</span>";
+                    }
+                },
+                {
+                "targets": '_all',
+                "render": function (data, type, row) {
+                    if(data == "P") return '<span class="glyphicon glyphicon-ok"></span>' ;
+                    if(data == "A") return '<span class="glyphicon glyphicon-remove"></span>' ;
+                    return data;
+                }
+            } ]
+            ,
+            "sDom": "<'row controlsRow'<'col-md-4 controlPageLength'l><'col-md-4'<'container dateRanger'>><'col-md-4 controlSearch'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
+            //"sDom": '<"H"lfr>t<"F"<"testbuttonarea">ip>'
         });
+        api = $("#sheet").DataTable();
+        $( "div.testbuttonarea" ).html('<button id="testbutton">Test</button>');
     }
 
     function applyEffects(){
 
-        var api = $("#sheet").DataTable();
         var tbody = $('#sheet tbody');
         var highlightClass = 'info';
 
@@ -170,17 +214,17 @@
                 //console.log($(this).css('color','white').css('backgroundColor','blue'));
             }
         });
+        $(".dataTables_filter input[type=search]").css('margin','0');
     }
 
     function toggleColumnVisibility(num,show){
         // show-> { show:1,hide:0 }
-        var api = $("#sheet").DataTable();
         var column = api.column(num);
-        column.visible(show);
+        column.visible(show,false);
     }
     function createRanger(lectureDates){
 
-        $("#dateRanger").ionRangeSlider({
+        $("#dateRanger,.dateRanger").ionRangeSlider({
             type: "double",
             values: lectureDates,
             values_separator: "&nbsp;  to &nbsp;",
@@ -194,9 +238,19 @@
                 from = data.from;
                 to = data.to;
                 console.log("changed from"+from+" to "+to);
-                for(i=3;i<from+3;i++) toggleColumnVisibility(i,false);
-                for(i=from+3;i<=to+3;i++) toggleColumnVisibility(i,true);
-                for(i=to+1+3;i<lectureDates.length+3;i++) toggleColumnVisibility(i,false);
+//                for(i=3;i<from+3;i++) toggleColumnVisibility(i,false);
+//                for(i=from+3;i<=to+3;i++) toggleColumnVisibility(i,true);
+//                for(i=to+1+3;i<lectureDates.length+3;i++) toggleColumnVisibility(i,false);
+                visiOn = [];
+                visiOff = [];
+                for(i=3;i<lectureDates.length+3;i++){
+                    if(i>=from+3 && i<=to+3) visiOn.push(i);
+                    else visiOff.push(i);
+                }
+                api.columns(visiOff).visible(false,true);
+                api.columns(visiOn).visible(true,true);
+                api.columns.adjust().draw(true); // improves performance
+
                 updateAttended(from,to);
                 updateSummary(from,to);
             },
@@ -219,11 +273,17 @@
     }
 
     function updateAttended(from,to){
-        var api = $("#sheet").DataTable();
         var myColumn = api.column(2);
         var newAttended = getUpdatedAttendedValues(from,to);
+        /*
         nodes = myColumn.nodes().to$().each(function(index,value){
             $(this).html(newAttended[index]);
+        });
+        */
+        var presents = myColumn.nodes().to$();
+        console.log(presents);
+        $.each(newAttended,function(index,value){
+            presents.find('.present'+index).html(value);
         });
     }
 
@@ -249,6 +309,7 @@
 
     }
 
+
 // show classes between rangestopper
 
 
@@ -258,4 +319,62 @@
 <style>
     #sheet > thead > tr > th[class*="sort"]::after{display: none}
     table.dataTable.table-condensed thead > tr > th {  padding-right: 5px;  }
+    body > .container{
+        width:auto;
+        margin:0;
+        padding:0;
+    }
+    #tableContainer{
+        padding:0 15px;
+        margin:0 -15px;
+    }
+    #sheet td, #sheet th{
+        font-size: 13px;
+        text-align:center;
+    }
+    #sheet .nameRow{
+        padding-left: 2.5%;
+        text-align: left;
+    }
+    .glyphicon-ok{
+        color:green;
+        font-size: 12px;
+    }
+    .glyphicon-remove{
+        color:red;
+        font-size: 12px;
+    }
+    a{
+        color:black;
+    }
+    .controlSearch,.controlPageLength{
+        margin-top:18px;
+    }
+    .controlsRow{
+        padding: 5px;
+        margin-bottom: -6px;
+        background: #556;
+    }
+    .custom-menu {
+        z-index:1000;
+        position: absolute;
+        background-color:#C0C0C0;
+        border: 1px solid black;
+        padding: 2px;
+    }
+    html{
+        overflow-x:hidden;
+    }
+    .headSubjectR{
+        font-size: 15px;
+        color: #cccccc;
+        padding: 10px 0;
+    }
+    .headSubjectR span{
+        font-weight: bold;
+    }
+    .mainHeading{
+        font-size: 25px;
+        text-align: center;
+    }
 </style>

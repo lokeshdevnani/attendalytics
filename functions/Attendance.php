@@ -32,6 +32,7 @@ class Attendance {
         }
 
     }
+
     public function getRollRange($classId){
         $p = $this->db->prepare("SELECT rollStart,rollEnd FROM classes WHERE id=? ");
         $p->execute(array($classId));
@@ -108,7 +109,7 @@ class Attendance {
         return $lectureList;
    }
 
-    public function getNamesForClass($classId){
+    public function getStudentNames($classId){
         $q = $this->db->prepare("SELECT name FROM students WHERE classId = ?");
         $q->execute(array($classId));
         $lectureList = $q->fetchAll(PDO::FETCH_COLUMN,"name");
