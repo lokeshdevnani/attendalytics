@@ -5,11 +5,11 @@ require_once 'functions/Attendance.php';
 
 $att = new Attendance($db);
 $date = new DateTime('2015-03-01 08:30:00');
-for($i=0;$i<300;$i++){
-    $classId = rand(1,4);
+for($i=0;$i<50;$i++){
+    $classId = 4;
     $subjectId = rand(1,6);
     $teacherId = rand(1,20);
-    $abCount = rand(rand(0,10),rand(5,40));
+    $abCount = rand(rand(0,10),rand(10,40));
     $absentees = array();
     for($j=0;$j<$abCount;$j++){
         $absentees[] = 68*($classId-1) + rand(1,68);

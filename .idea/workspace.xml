@@ -2,13 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="820dcefb-78ee-42bf-9972-ea6141a33ab1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/subjectwise.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test2.php" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\attendance\getBySubject.php" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bystudent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/byteacher.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/classes.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/showclasses.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/teacherwise.php" />
+      <change type="MOVED" beforePath="C:\xampp\htdocs\attendance\student.php" afterPath="$PROJECT_DIR$/studentwise.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/functions/Attendance.php" afterPath="$PROJECT_DIR$/functions/Attendance.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/functions/database.php" afterPath="$PROJECT_DIR$/functions/database.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/insert.php" afterPath="$PROJECT_DIR$/insert.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/show.php" afterPath="$PROJECT_DIR$/show.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/subjectwise.php" afterPath="$PROJECT_DIR$/subjectwise.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.php" afterPath="$PROJECT_DIR$/test.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test2.php" afterPath="$PROJECT_DIR$/test2.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="attendance.iws" />
@@ -32,19 +38,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="subjectwise.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/subjectwise.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="15" selection-start="479" selection-end="479" vertical-scroll-proportion="0.7763401" vertical-offset="0" max-vertical-offset="1386">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="insert.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/insert.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="38" selection-start="492" selection-end="492" vertical-scroll-proportion="-11.9" vertical-offset="0" max-vertical-offset="567">
+            <state line="5" column="0" selection-start="0" selection-end="115" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="672">
               <folding />
             </state>
           </provider>
@@ -53,75 +50,109 @@
       <file leaf-file-name="Attendance.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/functions/Attendance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="23" selection-start="204" selection-end="207" vertical-scroll-proportion="-3.0545454" vertical-offset="0" max-vertical-offset="2877">
+            <state line="166" column="90" selection-start="5940" selection-end="5940" vertical-scroll-proportion="-11.166667" vertical-offset="3151" max-vertical-offset="4704">
               <folding>
-                <element signature="n#__construct#0;n#Attendance#0;n#!!top" expanded="false" />
-                <marker date="1430832988153" expanded="true" signature="312:412" placeholder="INSERT INTO ..." />
-                <marker date="1430832988153" expanded="true" signature="793:840" placeholder="INSERT INTO ..." />
-                <marker date="1430832988153" expanded="true" signature="1163:1211" placeholder="SELECT rollS..classes..." />
-                <marker date="1430832988153" expanded="true" signature="1653:1745" placeholder="SELECT rollS..classes..." />
-                <marker date="1430832988153" expanded="true" signature="1704:1743" placeholder="SELECT class..lectures..." />
-                <marker date="1430832988153" expanded="true" signature="1969:1976" placeholder="SELECT absen..." />
-                <marker date="1430832988153" expanded="true" signature="1969:2033" placeholder="SELECT rolln..absentees..." />
-                <marker date="1430832988153" expanded="true" signature="2657:2721" placeholder="SELECT rolln..absentees..." />
-                <marker date="1430832988153" expanded="true" signature="3301:3308" placeholder="SELECT lectu..." />
-                <marker date="1430832988153" expanded="true" signature="3301:3389" placeholder="SELECT id,te..." />
-                <marker date="1430832988153" expanded="true" signature="3610:3653" placeholder="SELECT name ..students..." />
-                <marker date="1430832988153" expanded="true" signature="3908:3945" placeholder="SELECT name ..classes..." />
-                <marker date="1430832988153" expanded="true" signature="4085:4123" placeholder="SELECT name ..subjects..." />
+                <marker date="1431504353971" expanded="true" signature="390:490" placeholder="INSERT INTO ..." />
+                <marker date="1431504353971" expanded="true" signature="871:918" placeholder="INSERT INTO ..." />
+                <marker date="1431504353971" expanded="true" signature="1240:1288" placeholder="SELECT rollS..classes..." />
+                <marker date="1431504353971" expanded="true" signature="1753:1845" placeholder="SELECT rollS..classes..." />
+                <marker date="1431504353971" expanded="true" signature="1804:1843" placeholder="SELECT class..lectures..." />
+                <marker date="1431504353971" expanded="true" signature="2069:2076" placeholder="SELECT absen..." />
+                <marker date="1431504353971" expanded="true" signature="2069:2133" placeholder="SELECT rolln..absentees..." />
+                <marker date="1431504353971" expanded="true" signature="2757:2821" placeholder="SELECT rolln..absentees..." />
+                <marker date="1431504353971" expanded="true" signature="3401:3408" placeholder="SELECT lectu..." />
+                <marker date="1431504353971" expanded="true" signature="3401:3489" placeholder="SELECT id,te..." />
+                <marker date="1431504353971" expanded="true" signature="3710:3753" placeholder="SELECT name ..students..." />
+                <marker date="1431504353971" expanded="true" signature="4008:4045" placeholder="SELECT name ..classes..." />
+                <marker date="1431504353971" expanded="true" signature="4185:4223" placeholder="SELECT name ..subjects..." />
+                <marker date="1431504353971" expanded="true" signature="4529:5061" placeholder="SELECT rollS..subjectteachers..." />
+                <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+                <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+                <marker date="1431504353971" expanded="true" signature="4669:4703" placeholder="SELECT * FRO..classes..." />
+                <marker date="1431504353971" expanded="true" signature="4744:4779" placeholder="SELECT * FRO..subjects..." />
+                <marker date="1431504353971" expanded="true" signature="5152:5460" placeholder="SELECT teach..subjectteachers..." />
+                <marker date="1431504353971" expanded="true" signature="5245:5334" placeholder="SELECT COUNT..lectures..." />
+                <marker date="1431504353971" expanded="true" signature="5659:5711" placeholder="SELECT id as..classes..." />
+                <marker date="1431504353971" expanded="true" signature="5883:5979" placeholder="SELECT id,na..subjects..." />
+                <marker date="1431504353971" expanded="true" signature="5925:5978" placeholder="SELECT subje..subjectteachers..." />
+                <marker date="1431504353971" expanded="true" signature="6161:6503" placeholder="SELECT L.id ..." />
+                <marker date="1431504353971" expanded="true" signature="6687:7306" placeholder="SELECT L.id,..." />
+                <marker date="1431504353971" expanded="true" signature="6687:7304" placeholder="SELECT L.id,..." />
+                <marker date="1431504353971" expanded="true" signature="7504:7552" placeholder="SELECT id,na..teachers..." />
+                <marker date="1431504353971" expanded="true" signature="7733:7917" placeholder="SELECT rolln..students..." />
+                <marker date="1431504353971" expanded="true" signature="7829:7869" placeholder="SELECT id,na..classes..." />
+                <marker date="1431504353971" expanded="true" signature="8102:8321" placeholder="SELECT class..subjectteachers..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="show.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/show.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="13" selection-start="504" selection-end="899" vertical-scroll-proportion="-6.109091" vertical-offset="105" max-vertical-offset="8085">
+            <state line="385" column="8" selection-start="13473" selection-end="13473" vertical-scroll-proportion="0.14602588" vertical-offset="7103" max-vertical-offset="7728">
+              <folding>
+                <element signature="tag#div#0;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+                <element signature="tag#div#0;tag#div#1;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+                <element signature="tag#div#2;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bystudent.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bystudent.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="14" selection-start="751" selection-end="751" vertical-scroll-proportion="-13.3" vertical-offset="0" max-vertical-offset="6195">
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="student.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/student.php">
+      <file leaf-file-name="studentwise.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/studentwise.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="126">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="student-attendance.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/student-attendance.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="252">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="2" selection-start="123" selection-end="123" vertical-scroll-proportion="-1.9090909" vertical-offset="42" max-vertical-offset="798">
+            <state line="24" column="0" selection-start="673" selection-end="673" vertical-scroll-proportion="-8.4" vertical-offset="252" max-vertical-offset="1113">
               <folding>
-                <marker date="1430835448959" expanded="true" signature="148:201" placeholder="SELECT first..first..." />
-                <marker date="1430835448959" expanded="true" signature="318:369" placeholder="SELECT lastn..last..." />
-                <marker date="1430835448959" expanded="true" signature="465:520" placeholder="INSERT INTO ..." />
-                <marker date="1430835448959" expanded="true" signature="465:522" placeholder="INSERT INTO ..." />
+                <marker date="1431503777297" expanded="true" signature="1179:1237" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test2.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test2.php">
+      <file leaf-file-name="byteacher.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/byteacher.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="2" selection-start="7" selection-end="9" vertical-scroll-proportion="-0.76363635" vertical-offset="0" max-vertical-offset="630">
+            <state line="32" column="24" selection-start="1158" selection-end="1158" vertical-scroll-proportion="-17.5" vertical-offset="147" max-vertical-offset="5649">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="teacherwise.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/teacherwise.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="24" selection-start="551" selection-end="551" vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="525">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="classes.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/classes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="0" selection-start="86" selection-end="86" vertical-scroll-proportion="-2.1" vertical-offset="0" max-vertical-offset="567">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="showclasses.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/showclasses.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="167" column="34" selection-start="5661" selection-end="5662" vertical-scroll-proportion="0.0" vertical-offset="63" max-vertical-offset="5502">
               <folding />
             </state>
           </provider>
@@ -140,18 +171,25 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/functions/database.php" />
         <option value="$PROJECT_DIR$/display.php" />
         <option value="$PROJECT_DIR$/../nasarawa/nigeria/includes/footer.php" />
         <option value="$PROJECT_DIR$/../nasarawa/nigeria/index.php" />
         <option value="$PROJECT_DIR$/student.php" />
         <option value="$PROJECT_DIR$/getBySubject.php" />
-        <option value="$PROJECT_DIR$/functions/Attendance.php" />
+        <option value="$PROJECT_DIR$/test2.php" />
+        <option value="$PROJECT_DIR$/subjectwise.php" />
         <option value="$PROJECT_DIR$/test.php" />
         <option value="$PROJECT_DIR$/insert.php" />
-        <option value="$PROJECT_DIR$/test2.php" />
+        <option value="$PROJECT_DIR$/showclasses.php" />
+        <option value="$PROJECT_DIR$/../code/index.php" />
+        <option value="$PROJECT_DIR$/bystudent.php" />
+        <option value="$PROJECT_DIR$/functions/database.php" />
+        <option value="$PROJECT_DIR$/byteacher.php" />
+        <option value="$PROJECT_DIR$/teacherwise.php" />
+        <option value="$PROJECT_DIR$/classes.php" />
+        <option value="$PROJECT_DIR$/studentwise.php" />
+        <option value="$PROJECT_DIR$/functions/Attendance.php" />
         <option value="$PROJECT_DIR$/show.php" />
-        <option value="$PROJECT_DIR$/subjectwise.php" />
       </list>
     </option>
   </component>
@@ -159,7 +197,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1378" />
+    <option name="width" value="1382" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -188,6 +226,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -222,7 +261,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -230,7 +268,7 @@
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="SearchEverywhereHistory" value="&#10;ms" />
+    <property name="SearchEverywhereHistory" value="tim&#10;ms" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
   </component>
   <component name="RunManager" selected="PHP Script.database.php">
@@ -293,25 +331,25 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496329" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11859444" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901135" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -336,24 +374,243 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/insert.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="0" selection-end="115" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="672">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/functions/Attendance.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="207" column="15" selection-start="8011" selection-end="8011" vertical-scroll-proportion="0.0" vertical-offset="4347" max-vertical-offset="4557">
+          <folding>
+            <marker date="1431504353971" expanded="true" signature="390:490" placeholder="INSERT INTO ..." />
+            <marker date="1431504353971" expanded="true" signature="871:918" placeholder="INSERT INTO ..." />
+            <marker date="1431504353971" expanded="true" signature="1240:1288" placeholder="SELECT rollS..classes..." />
+            <marker date="1431504353971" expanded="true" signature="1753:1845" placeholder="SELECT rollS..classes..." />
+            <marker date="1431504353971" expanded="true" signature="1804:1843" placeholder="SELECT class..lectures..." />
+            <marker date="1431504353971" expanded="true" signature="2069:2076" placeholder="SELECT absen..." />
+            <marker date="1431504353971" expanded="true" signature="2069:2133" placeholder="SELECT rolln..absentees..." />
+            <marker date="1431504353971" expanded="true" signature="2757:2821" placeholder="SELECT rolln..absentees..." />
+            <marker date="1431504353971" expanded="true" signature="3401:3408" placeholder="SELECT lectu..." />
+            <marker date="1431504353971" expanded="true" signature="3401:3489" placeholder="SELECT id,te..." />
+            <marker date="1431504353971" expanded="true" signature="3710:3753" placeholder="SELECT name ..students..." />
+            <marker date="1431504353971" expanded="true" signature="4008:4045" placeholder="SELECT name ..classes..." />
+            <marker date="1431504353971" expanded="true" signature="4185:4223" placeholder="SELECT name ..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="4529:5061" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4669:4703" placeholder="SELECT * FRO..classes..." />
+            <marker date="1431504353971" expanded="true" signature="4744:4779" placeholder="SELECT * FRO..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="5152:5460" placeholder="SELECT teach..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="5245:5334" placeholder="SELECT COUNT..lectures..." />
+            <marker date="1431504353971" expanded="true" signature="5659:5711" placeholder="SELECT id as..classes..." />
+            <marker date="1431504353971" expanded="true" signature="5883:5979" placeholder="SELECT id,na..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="5925:5978" placeholder="SELECT subje..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="6161:6503" placeholder="SELECT L.id ..." />
+            <marker date="1431504353971" expanded="true" signature="6687:7306" placeholder="SELECT L.id,..." />
+            <marker date="1431504353971" expanded="true" signature="6687:7304" placeholder="SELECT L.id,..." />
+            <marker date="1431504353971" expanded="true" signature="7504:7552" placeholder="SELECT id,na..teachers..." />
+            <marker date="1431504353971" expanded="true" signature="7733:7917" placeholder="SELECT rolln..students..." />
+            <marker date="1431504353971" expanded="true" signature="7829:7869" placeholder="SELECT id,na..classes..." />
+            <marker date="1431504353971" expanded="true" signature="8102:8321" placeholder="SELECT class..subjectteachers..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/show.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="133" column="19" selection-start="5202" selection-end="5209" vertical-scroll-proportion="0.0" vertical-offset="2613" max-vertical-offset="8526">
+          <folding>
+            <element signature="tag#div#0;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#div#0;tag#div#1;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#div#2;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bystudent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="30" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6195">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/studentwise.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="12" selection-start="142" selection-end="142" vertical-scroll-proportion="0.0" vertical-offset="147" max-vertical-offset="861">
+          <folding>
+            <marker date="1431503777297" expanded="true" signature="1179:1237" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/byteacher.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="24" selection-start="1158" selection-end="1158" vertical-scroll-proportion="0.0" vertical-offset="147" max-vertical-offset="5649">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teacherwise.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="24" selection-start="551" selection-end="551" vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="525">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="37" selection-start="313" selection-end="313" vertical-scroll-proportion="0.0" vertical-offset="231" max-vertical-offset="567">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/showclasses.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="167" column="34" selection-start="5661" selection-end="5662" vertical-scroll-proportion="0.0" vertical-offset="63" max-vertical-offset="5502">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subjectwise.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="11" selection-start="896" selection-end="896" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1533" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insert.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="0" selection-end="115" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="672">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/show.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="63" selection-start="4182" selection-end="4182" vertical-scroll-proportion="0.0" vertical-offset="2046" max-vertical-offset="8526">
+          <folding>
+            <element signature="tag#div#0;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#div#0;tag#div#1;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#div#2;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/functions/Attendance.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="189" column="0" selection-start="7076" selection-end="7076" vertical-scroll-proportion="0.0" vertical-offset="3969" max-vertical-offset="4116">
+          <folding>
+            <marker date="1431504353971" expanded="true" signature="390:490" placeholder="INSERT INTO ..." />
+            <marker date="1431504353971" expanded="true" signature="871:918" placeholder="INSERT INTO ..." />
+            <marker date="1431504353971" expanded="true" signature="1240:1288" placeholder="SELECT rollS..classes..." />
+            <marker date="1431504353971" expanded="true" signature="1753:1845" placeholder="SELECT rollS..classes..." />
+            <marker date="1431504353971" expanded="true" signature="1804:1843" placeholder="SELECT class..lectures..." />
+            <marker date="1431504353971" expanded="true" signature="2069:2076" placeholder="SELECT absen..." />
+            <marker date="1431504353971" expanded="true" signature="2069:2133" placeholder="SELECT rolln..absentees..." />
+            <marker date="1431504353971" expanded="true" signature="2757:2821" placeholder="SELECT rolln..absentees..." />
+            <marker date="1431504353971" expanded="true" signature="3401:3408" placeholder="SELECT lectu..." />
+            <marker date="1431504353971" expanded="true" signature="3401:3489" placeholder="SELECT id,te..." />
+            <marker date="1431504353971" expanded="true" signature="3710:3753" placeholder="SELECT name ..students..." />
+            <marker date="1431504353971" expanded="true" signature="4008:4045" placeholder="SELECT name ..classes..." />
+            <marker date="1431504353971" expanded="true" signature="4185:4223" placeholder="SELECT name ..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="4529:5061" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4669:4703" placeholder="SELECT * FRO..classes..." />
+            <marker date="1431504353971" expanded="true" signature="4744:4779" placeholder="SELECT * FRO..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="5152:5460" placeholder="SELECT teach..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="5245:5334" placeholder="SELECT COUNT..lectures..." />
+            <marker date="1431504353971" expanded="true" signature="5659:5711" placeholder="SELECT id as..classes..." />
+            <marker date="1431504353971" expanded="true" signature="5883:5979" placeholder="SELECT id,na..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="5925:5978" placeholder="SELECT subje..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="6161:6503" placeholder="SELECT L.id ..." />
+            <marker date="1431504353971" expanded="true" signature="6687:7306" placeholder="SELECT L.id,..." />
+            <marker date="1431504353971" expanded="true" signature="6687:7304" placeholder="SELECT L.id,..." />
+            <marker date="1431504353971" expanded="true" signature="7504:7552" placeholder="SELECT id,na..teachers..." />
+            <marker date="1431504353971" expanded="true" signature="7733:7917" placeholder="SELECT rolln..students..." />
+            <marker date="1431504353971" expanded="true" signature="7829:7869" placeholder="SELECT id,na..classes..." />
+            <marker date="1431504353971" expanded="true" signature="8102:8321" placeholder="SELECT class..subjectteachers..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/studentwise.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="27" selection-start="114" selection-end="114" vertical-scroll-proportion="0.0" vertical-offset="63" max-vertical-offset="735">
+          <folding>
+            <marker date="1431503777297" expanded="true" signature="1179:1237" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teacherwise.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="12" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0" vertical-offset="147" max-vertical-offset="273">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="2" selection-start="125" selection-end="125" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="504">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/showclasses.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="0" selection-start="4905" selection-end="4905" vertical-scroll-proportion="0.0" vertical-offset="4961" max-vertical-offset="5502">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="0" selection-start="1454" selection-end="1454" vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="1302" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test2.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="41" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0" vertical-offset="336" max-vertical-offset="630" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/functions/Attendance.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="45" column="1" selection-start="1377" selection-end="1377" vertical-scroll-proportion="0.0" vertical-offset="945" max-vertical-offset="1071">
           <folding>
-            <element signature="n#__construct#0;n#Attendance#0;n#!!top" expanded="false" />
-            <marker date="1430832988153" expanded="true" signature="312:412" placeholder="INSERT INTO ..." />
-            <marker date="1430832988153" expanded="true" signature="793:840" placeholder="INSERT INTO ..." />
-            <marker date="1430832988153" expanded="true" signature="1163:1211" placeholder="SELECT rollS..classes..." />
-            <marker date="1430832988153" expanded="true" signature="1653:1745" placeholder="SELECT rollS..classes..." />
-            <marker date="1430832988153" expanded="true" signature="1704:1743" placeholder="SELECT class..lectures..." />
-            <marker date="1430832988153" expanded="true" signature="1969:1976" placeholder="SELECT absen..." />
-            <marker date="1430832988153" expanded="true" signature="1969:2033" placeholder="SELECT rolln..absentees..." />
-            <marker date="1430832988153" expanded="true" signature="2657:2721" placeholder="SELECT rolln..absentees..." />
-            <marker date="1430832988153" expanded="true" signature="3301:3308" placeholder="SELECT lectu..." />
-            <marker date="1430832988153" expanded="true" signature="3301:3389" placeholder="SELECT id,te..." />
-            <marker date="1430832988153" expanded="true" signature="3610:3653" placeholder="SELECT name ..students..." />
-            <marker date="1430832988153" expanded="true" signature="3908:3945" placeholder="SELECT name ..classes..." />
-            <marker date="1430832988153" expanded="true" signature="4085:4123" placeholder="SELECT name ..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="390:490" placeholder="INSERT INTO ..." />
+            <marker date="1431504353971" expanded="true" signature="871:918" placeholder="INSERT INTO ..." />
+            <marker date="1431504353971" expanded="true" signature="1240:1288" placeholder="SELECT rollS..classes..." />
+            <marker date="1431504353971" expanded="true" signature="1753:1845" placeholder="SELECT rollS..classes..." />
+            <marker date="1431504353971" expanded="true" signature="1804:1843" placeholder="SELECT class..lectures..." />
+            <marker date="1431504353971" expanded="true" signature="2069:2076" placeholder="SELECT absen..." />
+            <marker date="1431504353971" expanded="true" signature="2069:2133" placeholder="SELECT rolln..absentees..." />
+            <marker date="1431504353971" expanded="true" signature="2757:2821" placeholder="SELECT rolln..absentees..." />
+            <marker date="1431504353971" expanded="true" signature="3401:3408" placeholder="SELECT lectu..." />
+            <marker date="1431504353971" expanded="true" signature="3401:3489" placeholder="SELECT id,te..." />
+            <marker date="1431504353971" expanded="true" signature="3710:3753" placeholder="SELECT name ..students..." />
+            <marker date="1431504353971" expanded="true" signature="4008:4045" placeholder="SELECT name ..classes..." />
+            <marker date="1431504353971" expanded="true" signature="4185:4223" placeholder="SELECT name ..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="4529:5061" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4669:4703" placeholder="SELECT * FRO..classes..." />
+            <marker date="1431504353971" expanded="true" signature="4744:4779" placeholder="SELECT * FRO..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="5152:5460" placeholder="SELECT teach..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="5245:5334" placeholder="SELECT COUNT..lectures..." />
+            <marker date="1431504353971" expanded="true" signature="5659:5711" placeholder="SELECT id as..classes..." />
+            <marker date="1431504353971" expanded="true" signature="5883:5979" placeholder="SELECT id,na..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="5925:5978" placeholder="SELECT subje..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="6161:6503" placeholder="SELECT L.id ..." />
+            <marker date="1431504353971" expanded="true" signature="6687:7306" placeholder="SELECT L.id,..." />
+            <marker date="1431504353971" expanded="true" signature="6687:7304" placeholder="SELECT L.id,..." />
+            <marker date="1431504353971" expanded="true" signature="7504:7552" placeholder="SELECT id,na..teachers..." />
+            <marker date="1431504353971" expanded="true" signature="7733:7917" placeholder="SELECT rolln..students..." />
+            <marker date="1431504353971" expanded="true" signature="7829:7869" placeholder="SELECT id,na..classes..." />
+            <marker date="1431504353971" expanded="true" signature="8102:8321" placeholder="SELECT class..subjectteachers..." />
           </folding>
         </state>
       </provider>
@@ -369,20 +626,36 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="12" selection-start="920" selection-end="920" vertical-scroll-proportion="0.0" vertical-offset="140" max-vertical-offset="1020">
           <folding>
-            <element signature="n#__construct#0;n#Attendance#0;n#!!top" expanded="false" />
-            <marker date="1430832988153" expanded="true" signature="312:412" placeholder="INSERT INTO ..." />
-            <marker date="1430832988153" expanded="true" signature="793:840" placeholder="INSERT INTO ..." />
-            <marker date="1430832988153" expanded="true" signature="1163:1211" placeholder="SELECT rollS..classes..." />
-            <marker date="1430832988153" expanded="true" signature="1653:1745" placeholder="SELECT rollS..classes..." />
-            <marker date="1430832988153" expanded="true" signature="1704:1743" placeholder="SELECT class..lectures..." />
-            <marker date="1430832988153" expanded="true" signature="1969:1976" placeholder="SELECT absen..." />
-            <marker date="1430832988153" expanded="true" signature="1969:2033" placeholder="SELECT rolln..absentees..." />
-            <marker date="1430832988153" expanded="true" signature="2657:2721" placeholder="SELECT rolln..absentees..." />
-            <marker date="1430832988153" expanded="true" signature="3301:3308" placeholder="SELECT lectu..." />
-            <marker date="1430832988153" expanded="true" signature="3301:3389" placeholder="SELECT id,te..." />
-            <marker date="1430832988153" expanded="true" signature="3610:3653" placeholder="SELECT name ..students..." />
-            <marker date="1430832988153" expanded="true" signature="3908:3945" placeholder="SELECT name ..classes..." />
-            <marker date="1430832988153" expanded="true" signature="4085:4123" placeholder="SELECT name ..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="390:490" placeholder="INSERT INTO ..." />
+            <marker date="1431504353971" expanded="true" signature="871:918" placeholder="INSERT INTO ..." />
+            <marker date="1431504353971" expanded="true" signature="1240:1288" placeholder="SELECT rollS..classes..." />
+            <marker date="1431504353971" expanded="true" signature="1753:1845" placeholder="SELECT rollS..classes..." />
+            <marker date="1431504353971" expanded="true" signature="1804:1843" placeholder="SELECT class..lectures..." />
+            <marker date="1431504353971" expanded="true" signature="2069:2076" placeholder="SELECT absen..." />
+            <marker date="1431504353971" expanded="true" signature="2069:2133" placeholder="SELECT rolln..absentees..." />
+            <marker date="1431504353971" expanded="true" signature="2757:2821" placeholder="SELECT rolln..absentees..." />
+            <marker date="1431504353971" expanded="true" signature="3401:3408" placeholder="SELECT lectu..." />
+            <marker date="1431504353971" expanded="true" signature="3401:3489" placeholder="SELECT id,te..." />
+            <marker date="1431504353971" expanded="true" signature="3710:3753" placeholder="SELECT name ..students..." />
+            <marker date="1431504353971" expanded="true" signature="4008:4045" placeholder="SELECT name ..classes..." />
+            <marker date="1431504353971" expanded="true" signature="4185:4223" placeholder="SELECT name ..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="4529:5061" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4669:4703" placeholder="SELECT * FRO..classes..." />
+            <marker date="1431504353971" expanded="true" signature="4744:4779" placeholder="SELECT * FRO..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="5152:5460" placeholder="SELECT teach..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="5245:5334" placeholder="SELECT COUNT..lectures..." />
+            <marker date="1431504353971" expanded="true" signature="5659:5711" placeholder="SELECT id as..classes..." />
+            <marker date="1431504353971" expanded="true" signature="5883:5979" placeholder="SELECT id,na..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="5925:5978" placeholder="SELECT subje..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="6161:6503" placeholder="SELECT L.id ..." />
+            <marker date="1431504353971" expanded="true" signature="6687:7306" placeholder="SELECT L.id,..." />
+            <marker date="1431504353971" expanded="true" signature="6687:7304" placeholder="SELECT L.id,..." />
+            <marker date="1431504353971" expanded="true" signature="7504:7552" placeholder="SELECT id,na..teachers..." />
+            <marker date="1431504353971" expanded="true" signature="7733:7917" placeholder="SELECT rolln..students..." />
+            <marker date="1431504353971" expanded="true" signature="7829:7869" placeholder="SELECT id,na..classes..." />
+            <marker date="1431504353971" expanded="true" signature="8102:8321" placeholder="SELECT class..subjectteachers..." />
           </folding>
         </state>
       </provider>
@@ -398,20 +671,36 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="12" selection-start="920" selection-end="920" vertical-scroll-proportion="0.0" vertical-offset="140" max-vertical-offset="1020">
           <folding>
-            <element signature="n#__construct#0;n#Attendance#0;n#!!top" expanded="false" />
-            <marker date="1430832988153" expanded="true" signature="312:412" placeholder="INSERT INTO ..." />
-            <marker date="1430832988153" expanded="true" signature="793:840" placeholder="INSERT INTO ..." />
-            <marker date="1430832988153" expanded="true" signature="1163:1211" placeholder="SELECT rollS..classes..." />
-            <marker date="1430832988153" expanded="true" signature="1653:1745" placeholder="SELECT rollS..classes..." />
-            <marker date="1430832988153" expanded="true" signature="1704:1743" placeholder="SELECT class..lectures..." />
-            <marker date="1430832988153" expanded="true" signature="1969:1976" placeholder="SELECT absen..." />
-            <marker date="1430832988153" expanded="true" signature="1969:2033" placeholder="SELECT rolln..absentees..." />
-            <marker date="1430832988153" expanded="true" signature="2657:2721" placeholder="SELECT rolln..absentees..." />
-            <marker date="1430832988153" expanded="true" signature="3301:3308" placeholder="SELECT lectu..." />
-            <marker date="1430832988153" expanded="true" signature="3301:3389" placeholder="SELECT id,te..." />
-            <marker date="1430832988153" expanded="true" signature="3610:3653" placeholder="SELECT name ..students..." />
-            <marker date="1430832988153" expanded="true" signature="3908:3945" placeholder="SELECT name ..classes..." />
-            <marker date="1430832988153" expanded="true" signature="4085:4123" placeholder="SELECT name ..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="390:490" placeholder="INSERT INTO ..." />
+            <marker date="1431504353971" expanded="true" signature="871:918" placeholder="INSERT INTO ..." />
+            <marker date="1431504353971" expanded="true" signature="1240:1288" placeholder="SELECT rollS..classes..." />
+            <marker date="1431504353971" expanded="true" signature="1753:1845" placeholder="SELECT rollS..classes..." />
+            <marker date="1431504353971" expanded="true" signature="1804:1843" placeholder="SELECT class..lectures..." />
+            <marker date="1431504353971" expanded="true" signature="2069:2076" placeholder="SELECT absen..." />
+            <marker date="1431504353971" expanded="true" signature="2069:2133" placeholder="SELECT rolln..absentees..." />
+            <marker date="1431504353971" expanded="true" signature="2757:2821" placeholder="SELECT rolln..absentees..." />
+            <marker date="1431504353971" expanded="true" signature="3401:3408" placeholder="SELECT lectu..." />
+            <marker date="1431504353971" expanded="true" signature="3401:3489" placeholder="SELECT id,te..." />
+            <marker date="1431504353971" expanded="true" signature="3710:3753" placeholder="SELECT name ..students..." />
+            <marker date="1431504353971" expanded="true" signature="4008:4045" placeholder="SELECT name ..classes..." />
+            <marker date="1431504353971" expanded="true" signature="4185:4223" placeholder="SELECT name ..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="4529:5061" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4669:4703" placeholder="SELECT * FRO..classes..." />
+            <marker date="1431504353971" expanded="true" signature="4744:4779" placeholder="SELECT * FRO..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="5152:5460" placeholder="SELECT teach..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="5245:5334" placeholder="SELECT COUNT..lectures..." />
+            <marker date="1431504353971" expanded="true" signature="5659:5711" placeholder="SELECT id as..classes..." />
+            <marker date="1431504353971" expanded="true" signature="5883:5979" placeholder="SELECT id,na..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="5925:5978" placeholder="SELECT subje..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="6161:6503" placeholder="SELECT L.id ..." />
+            <marker date="1431504353971" expanded="true" signature="6687:7306" placeholder="SELECT L.id,..." />
+            <marker date="1431504353971" expanded="true" signature="6687:7304" placeholder="SELECT L.id,..." />
+            <marker date="1431504353971" expanded="true" signature="7504:7552" placeholder="SELECT id,na..teachers..." />
+            <marker date="1431504353971" expanded="true" signature="7733:7917" placeholder="SELECT rolln..students..." />
+            <marker date="1431504353971" expanded="true" signature="7829:7869" placeholder="SELECT id,na..classes..." />
+            <marker date="1431504353971" expanded="true" signature="8102:8321" placeholder="SELECT class..subjectteachers..." />
           </folding>
         </state>
       </provider>
@@ -438,141 +727,172 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2920" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/functions/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="31" selection-start="504" selection-end="504" vertical-scroll-proportion="0.68911916" vertical-offset="0" max-vertical-offset="579">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/display.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="745" selection-end="745" vertical-scroll-proportion="-0.7" vertical-offset="672" max-vertical-offset="1680">
-          <folding>
-            <marker date="1430647889934" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1430647889934" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="33" column="0" selection-start="745" selection-end="745" vertical-scroll-proportion="-0.7" vertical-offset="672" max-vertical-offset="1680" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../nasarawa/nigeria/js/customize.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-3.5993433" vertical-offset="2192" max-vertical-offset="2919">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-3.5993433" vertical-offset="2192" max-vertical-offset="2919" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../nasarawa/nigeria/includes/sidebar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="44" selection-start="127" selection-end="127" vertical-scroll-proportion="0.037102472" vertical-offset="42" max-vertical-offset="756">
-          <folding />
-        </state>
+        <state line="3" column="44" selection-start="127" selection-end="127" vertical-scroll-proportion="0.037102472" vertical-offset="42" max-vertical-offset="756" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../nasarawa/nigeria/includes/header.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="0" selection-start="9814" selection-end="9814" vertical-scroll-proportion="0.9257951" vertical-offset="2626" max-vertical-offset="3276">
-          <folding />
-        </state>
+        <state line="150" column="0" selection-start="9814" selection-end="9814" vertical-scroll-proportion="0.9257951" vertical-offset="2626" max-vertical-offset="3276" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../nasarawa/nigeria/includes/footer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="1055" selection-end="1055" vertical-scroll-proportion="0.8533569" vertical-offset="0" max-vertical-offset="672">
-          <folding />
-        </state>
+        <state line="23" column="0" selection-start="1055" selection-end="1055" vertical-scroll-proportion="0.8533569" vertical-offset="0" max-vertical-offset="672" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../nasarawa/nigeria/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="226" column="28" selection-start="11253" selection-end="11253" vertical-scroll-proportion="0.5547703" vertical-offset="4432" max-vertical-offset="5103">
-          <folding />
-        </state>
+        <state line="226" column="28" selection-start="11253" selection-end="11253" vertical-scroll-proportion="0.5547703" vertical-offset="4432" max-vertical-offset="5103" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../nasarawa/nigeria/includes/head.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="69" selection-end="69" vertical-scroll-proportion="0.037102472" vertical-offset="0" max-vertical-offset="566">
-          <folding />
-        </state>
+        <state line="1" column="0" selection-start="69" selection-end="69" vertical-scroll-proportion="0.037102472" vertical-offset="0" max-vertical-offset="566" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/student-attendance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="609">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="609" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/student.php">
+    <entry file="file://$PROJECT_DIR$/test.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="609">
-          <folding />
-        </state>
+        <state line="51" column="0" selection-start="1454" selection-end="1454" vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="1302" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subjectwise.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="11" selection-start="896" selection-end="896" vertical-scroll-proportion="0.0" vertical-offset="588" max-vertical-offset="1533" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test2.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="41" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0" vertical-offset="336" max-vertical-offset="630" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/insert.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="38" selection-start="492" selection-end="492" vertical-scroll-proportion="-11.9" vertical-offset="0" max-vertical-offset="567">
+        <state line="5" column="0" selection-start="0" selection-end="115" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="672">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../code/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="19" selection-start="94" selection-end="94" vertical-scroll-proportion="0.074204944" vertical-offset="0" max-vertical-offset="11865" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/showclasses.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="167" column="34" selection-start="5661" selection-end="5662" vertical-scroll-proportion="0.0" vertical-offset="63" max-vertical-offset="5502">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/functions/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="43" selection-start="581" selection-end="581" vertical-scroll-proportion="0.79792744" vertical-offset="0" max-vertical-offset="609">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teacherwise.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="24" selection-start="551" selection-end="551" vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="525">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="0" selection-start="86" selection-end="86" vertical-scroll-proportion="-2.1" vertical-offset="0" max-vertical-offset="567">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/byteacher.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="24" selection-start="1158" selection-end="1158" vertical-scroll-proportion="-17.5" vertical-offset="147" max-vertical-offset="5649">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/studentwise.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="673" selection-end="673" vertical-scroll-proportion="-8.4" vertical-offset="252" max-vertical-offset="1113">
+          <folding>
+            <marker date="1431503777297" expanded="true" signature="1179:1237" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/functions/Attendance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="23" selection-start="204" selection-end="207" vertical-scroll-proportion="-3.0545454" vertical-offset="0" max-vertical-offset="2877">
+        <state line="166" column="90" selection-start="5940" selection-end="5940" vertical-scroll-proportion="-11.166667" vertical-offset="3151" max-vertical-offset="4704">
           <folding>
-            <element signature="n#__construct#0;n#Attendance#0;n#!!top" expanded="false" />
-            <marker date="1430832988153" expanded="true" signature="312:412" placeholder="INSERT INTO ..." />
-            <marker date="1430832988153" expanded="true" signature="793:840" placeholder="INSERT INTO ..." />
-            <marker date="1430832988153" expanded="true" signature="1163:1211" placeholder="SELECT rollS..classes..." />
-            <marker date="1430832988153" expanded="true" signature="1653:1745" placeholder="SELECT rollS..classes..." />
-            <marker date="1430832988153" expanded="true" signature="1704:1743" placeholder="SELECT class..lectures..." />
-            <marker date="1430832988153" expanded="true" signature="1969:1976" placeholder="SELECT absen..." />
-            <marker date="1430832988153" expanded="true" signature="1969:2033" placeholder="SELECT rolln..absentees..." />
-            <marker date="1430832988153" expanded="true" signature="2657:2721" placeholder="SELECT rolln..absentees..." />
-            <marker date="1430832988153" expanded="true" signature="3301:3308" placeholder="SELECT lectu..." />
-            <marker date="1430832988153" expanded="true" signature="3301:3389" placeholder="SELECT id,te..." />
-            <marker date="1430832988153" expanded="true" signature="3610:3653" placeholder="SELECT name ..students..." />
-            <marker date="1430832988153" expanded="true" signature="3908:3945" placeholder="SELECT name ..classes..." />
-            <marker date="1430832988153" expanded="true" signature="4085:4123" placeholder="SELECT name ..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="390:490" placeholder="INSERT INTO ..." />
+            <marker date="1431504353971" expanded="true" signature="871:918" placeholder="INSERT INTO ..." />
+            <marker date="1431504353971" expanded="true" signature="1240:1288" placeholder="SELECT rollS..classes..." />
+            <marker date="1431504353971" expanded="true" signature="1753:1845" placeholder="SELECT rollS..classes..." />
+            <marker date="1431504353971" expanded="true" signature="1804:1843" placeholder="SELECT class..lectures..." />
+            <marker date="1431504353971" expanded="true" signature="2069:2076" placeholder="SELECT absen..." />
+            <marker date="1431504353971" expanded="true" signature="2069:2133" placeholder="SELECT rolln..absentees..." />
+            <marker date="1431504353971" expanded="true" signature="2757:2821" placeholder="SELECT rolln..absentees..." />
+            <marker date="1431504353971" expanded="true" signature="3401:3408" placeholder="SELECT lectu..." />
+            <marker date="1431504353971" expanded="true" signature="3401:3489" placeholder="SELECT id,te..." />
+            <marker date="1431504353971" expanded="true" signature="3710:3753" placeholder="SELECT name ..students..." />
+            <marker date="1431504353971" expanded="true" signature="4008:4045" placeholder="SELECT name ..classes..." />
+            <marker date="1431504353971" expanded="true" signature="4185:4223" placeholder="SELECT name ..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="4529:5061" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4529:4854" placeholder="SELECT rollS..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="4669:4703" placeholder="SELECT * FRO..classes..." />
+            <marker date="1431504353971" expanded="true" signature="4744:4779" placeholder="SELECT * FRO..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="5152:5460" placeholder="SELECT teach..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="5245:5334" placeholder="SELECT COUNT..lectures..." />
+            <marker date="1431504353971" expanded="true" signature="5659:5711" placeholder="SELECT id as..classes..." />
+            <marker date="1431504353971" expanded="true" signature="5883:5979" placeholder="SELECT id,na..subjects..." />
+            <marker date="1431504353971" expanded="true" signature="5925:5978" placeholder="SELECT subje..subjectteachers..." />
+            <marker date="1431504353971" expanded="true" signature="6161:6503" placeholder="SELECT L.id ..." />
+            <marker date="1431504353971" expanded="true" signature="6687:7306" placeholder="SELECT L.id,..." />
+            <marker date="1431504353971" expanded="true" signature="6687:7304" placeholder="SELECT L.id,..." />
+            <marker date="1431504353971" expanded="true" signature="7504:7552" placeholder="SELECT id,na..teachers..." />
+            <marker date="1431504353971" expanded="true" signature="7733:7917" placeholder="SELECT rolln..students..." />
+            <marker date="1431504353971" expanded="true" signature="7829:7869" placeholder="SELECT id,na..classes..." />
+            <marker date="1431504353971" expanded="true" signature="8102:8321" placeholder="SELECT class..subjectteachers..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test2.php">
+    <entry file="file://$PROJECT_DIR$/bystudent.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="2" selection-start="7" selection-end="9" vertical-scroll-proportion="-0.76363635" vertical-offset="0" max-vertical-offset="630">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="2" selection-start="123" selection-end="123" vertical-scroll-proportion="-1.9090909" vertical-offset="42" max-vertical-offset="798">
+        <state line="19" column="14" selection-start="751" selection-end="751" vertical-scroll-proportion="-13.3" vertical-offset="0" max-vertical-offset="6195">
           <folding>
-            <marker date="1430835448959" expanded="true" signature="148:201" placeholder="SELECT first..first..." />
-            <marker date="1430835448959" expanded="true" signature="318:369" placeholder="SELECT lastn..last..." />
-            <marker date="1430835448959" expanded="true" signature="465:520" placeholder="INSERT INTO ..." />
-            <marker date="1430835448959" expanded="true" signature="465:522" placeholder="INSERT INTO ..." />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/show.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="13" selection-start="504" selection-end="899" vertical-scroll-proportion="-6.109091" vertical-offset="105" max-vertical-offset="8085">
+        <state line="385" column="8" selection-start="13473" selection-end="13473" vertical-scroll-proportion="0.14602588" vertical-offset="7103" max-vertical-offset="7728">
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="tag#div#0;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#div#0;tag#div#1;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#div#2;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/subjectwise.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="15" selection-start="479" selection-end="479" vertical-scroll-proportion="0.7763401" vertical-offset="0" max-vertical-offset="1386">
-          <folding />
         </state>
       </provider>
     </entry>

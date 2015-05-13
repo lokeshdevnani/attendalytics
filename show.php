@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-  <div class="row" style="background:#08c;">
+  <div class="row headRow">
      <div class="container">
         <h1 class="mainHeading">ATTENDANCE</h1>
          <?php
@@ -23,7 +23,7 @@
          ?>
      </div>
   </div>
-  <div class="row headSubjectR" style="background:#08c;">
+  <div class="row detailsRow">
       <div class="container">
         <div class="col-md-4 leftportion summaryData">
             Class: <span class="className"></span>
@@ -96,6 +96,9 @@
             data: params,
             success : function(result){
                 console.log(result);
+                if(result.error){
+                    $("#tableContainer").addClass('noData').html("<div class=error>"+result.error+"</div>");
+                }
                 // adding the thead headers
                 var lectureDates = [];
                 var tr2data = "";
@@ -103,7 +106,7 @@
                 var totalAtt=0;
                 $.each(result.lectureList,function(index,lecture){
 
-                    tr2data += ("<th><a data-id='" + index + "'>" + formatTime(lecture.time)+" " + "</a></th>");
+                    tr2data += ("<th><a data-id='" + lecture.id + "'>" + formatTime(lecture.time)+" " + "</a></th>");
                     tr3data += ("<th><a>" +lecture.present+ "</a></th>");
                     lectureDates.push(formatTime(lecture.time));
                     totalAtt += lecture.present;
@@ -123,10 +126,13 @@
 
     function loadSummary(totalAtt){
         var s = wholeData.summary;
+        var totalStudents = wholeData.data.length;
         totalDates = wholeData.lectureList.length;
         fromDate = wholeData.lectureList[0].time;
         toDate = wholeData.lectureList[totalDates-1].time;
-        percentAttendance = totalAtt/totalDates;
+        avgAttendancePerDay = totalAtt/totalDates;
+        var percent = avgAttendancePerDay/totalStudents * 100;
+        percent =  percent.toFixed(1);
 
         $(".summaryData .className").html(s.className);
         $(".summaryData .subjectName").html(s.subjectName);
@@ -135,7 +141,7 @@
         $(".summaryData .fromDate").html(formatTimeY(fromDate));
         $(".summaryData .toDate").html(formatTimeY(toDate));
         $(".summaryData .totalDates").html(totalDates);
-        $(".summaryData .percentAttendance").html(percentAttendance);
+        $(".summaryData .percentAttendance").html(percent);
 
     }
 
@@ -289,11 +295,12 @@
 
     function getTotalPercentage(from,to){
         var total = 0;
+        var totalStudents = wholeData.data.length;
         for(i=from;i<=to;i++)
             total += wholeData.lectureList[i].present;
         var avgAttendancePerDay = total/(to-from+1);
-        var percent = avgAttendancePerDay;
-        return percent;
+        var percent = avgAttendancePerDay/totalStudents * 100;
+        return percent.toFixed(1);
     }
 
     function updateSummary(from,to){
@@ -317,13 +324,18 @@
 
 </script>
 <style>
-    #sheet > thead > tr > th[class*="sort"]::after{display: none}
-    table.dataTable.table-condensed thead > tr > th {  padding-right: 5px;  }
     body > .container{
         width:auto;
         margin:0;
         padding:0;
     }
+    .headRow, .detailsRow{
+        background:#25253C;
+    }
+    table.dataTable.table-condensed thead > tr > th {  padding-right: 5px;  }
+
+    #sheet > thead > tr > th[class*="sort"]::after{display: none}
+
     #tableContainer{
         padding:0 15px;
         margin:0 -15px;
@@ -365,16 +377,30 @@
     html{
         overflow-x:hidden;
     }
-    .headSubjectR{
+    .detailsRow{
         font-size: 15px;
         color: #cccccc;
         padding: 10px 0;
     }
-    .headSubjectR span{
+    .detailsRow span{
         font-weight: bold;
     }
     .mainHeading{
         font-size: 25px;
         text-align: center;
+    }
+    #tableContainer.noData{
+        //position: fixed;
+        bottom: 0;
+        padding: 20px;
+        color:red;
+
+        //height: 100%;
+        background: black;
+        width:100%;
+        margin:0;
+    }
+    .error{
+        top: 50%;
     }
 </style>

@@ -19,3 +19,6 @@ try{
 function pr($arr){
     echo "<pre>",print_r($arr,1),"</pre>";
 }
+function dje($str){
+    die(json_encode(array("error"=>$str)));
+}

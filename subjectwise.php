@@ -7,26 +7,33 @@ require_once 'functions/Attendance.php';
  * Some validation to do now.
  *
  */
-if(isset($_GET['classId']) && isset($_GET['subjectId'])){
-    if(!empty($_GET['classId']) && !empty ($_GET['subjectId'])){
-        $class = $_GET['class'];
-        $subject= $_GET['subject'];
-        echo "<span class=hidden id=class>$class</span>";
-        echo "<span class=hidden id=subject>$subject</span>";
-    }
-}
+$classId;
+$subjectId;
 
-
-$classId = 2;
-$subjectId = 2;
 $att = new Attendance($db);
+$err = array();
 $result = array();
 $dateColumns = array();
-$summary = array();
 
+if( isset($_GET['classId']) && isset($_GET['subjectId']) && !empty($_GET['classId']) && !empty($_GET['subjectId'])){
+    $classId = $_GET['classId'];
+    $subjectId= $_GET['subjectId'];
+    if(is_numeric($classId) && is_numeric($subjectId)){
+        $summary = $att->getSummary($classId,$subjectId);
+        if(!$summary)
+            $err['error'] = "Class or subject is incorrect";
+    } else{
+        $err['error'] = "Invalid Data.";
+    }
+} else {
+    $err['error'] = "Sorry, No data recieved";
+}
+
+if(!empty($err)) die(json_encode($err));
 
 $lectureList = $att->getAllLecturesForClass($classId,$subjectId);
 $lectureCount = count($lectureList);
+//if(count)
 
 $att->getRollRange($classId);
 $rollStart = $att->getRollStart();
@@ -55,7 +62,7 @@ for($i=0;$i<$totalStudents;$i++)
 }
 
 
-$json['summary'] = $att->getSummary($classId,$subjectId);
+$json['summary'] = $summary;
 $json['data']= $result;
 $json['lectureList']= $lectureList;
 echo json_encode($json);
