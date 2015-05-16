@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="row" style="background:#08c;">
+    <div class="row headRow">
         <div class="container">
             <h1 class="mainHeading">ATTENDANCE</h1>
             <?php
@@ -20,10 +20,20 @@
             ?>
         </div>
     </div>
-    <div class="row headSubjectR" style="background:#08c;">
+    <div class="row detailsRow">
         <div class="container">
-            <div class="col-md-4 rightportion summaryData variableData">
-
+            <div class="col-md-4 leftportion">
+                <label>Name: </label><span class="studentname"></span>
+                <br><label>Roll No:</label><span class="rollno"></span>
+                <br><label>Class:</label><span class="class"></span>
+            </div>
+            <div class="col-md-4 leftportion">
+                <label>Total Classes: </label><span class="classesTotal"></span>
+                <br><label>Classes Attended:</label><span class="classesAttended"></span>
+                <br><label>Attendance:</label><span class="classesPercent"></span>%
+            </div>
+            <div class="col-md-4 leftportion">
+                <label>Remarks: </label><span class="studentRemarks"></span>
             </div>
         </div>
     </div>
@@ -48,6 +58,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap.js"></script>
+<script src="js/custom.js"></script>
 <!-- js includes end -->
 </body>
 </html>
@@ -56,21 +67,6 @@
     var wholeData;
     var api;
 
-    function formatTime(time){
-        var shortMonths= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        var t = time.split(/[- :]/);
-        var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-        var dateString = shortMonths[t[1]-1] +" "+ t[2];
-        return dateString;
-    }
-
-    function formatTimeY(time){
-        var shortMonths= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        var t = time.split(/[- :]/);
-        var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-        var dateString = t[2]+ " " + shortMonths[t[1]-1] +" "+ t[0];
-        return dateString;
-    }
 
     $(document).ready(function(){
         var classId = $("#class").html();
@@ -114,17 +110,12 @@
                     subjects[j].total++;
 
                     if(dates[i][subjects[j].id].status == 1){
-                        tdata+= ('<a class=studentStatus href="' +dates[i][subjects[j].id].lectureId+ '" data-time="'+dates[i][subjects[j].id].time+'" ><span class="glyphicon glyphicon-ok"></span></a>') ;
+                        tdata+= ('<a class=studentStatus href="lecture.php?id=' +dates[i][subjects[j].id].lectureId+ '" data-time="'+dates[i][subjects[j].id].time+'" ><span class="glyphicon glyphicon-ok"></span></a>') ;
                         subjects[j].present++;
                     } else
-                        tdata+= ('<a class=studentStatus href="' +dates[i][subjects[j].id].lectureId+ '" data-time="'+dates[i][subjects[j].id].time+'" ><span class="glyphicon glyphicon-remove"></span></a>') ;
+                        tdata+= ('<a class=studentStatus href="lecture.php?id=' +dates[i][subjects[j].id].lectureId+ '" data-time="'+dates[i][subjects[j].id].time+'" ><span class="glyphicon glyphicon-remove"></span></a>') ;
                 }
                 tdata+="</td>";
-                /*
-                tdata += ("<td>" +
-                    "<div><a class=tname href='" + classes[i].info[j].teacherId +"'>" + classes[i].info[j].teacherName + "</a></div>" +
-                    "<div><a class=lcount href='show.php?class="+classes[i].classId+"&subject="+subjects[j].id+"'>"+ classes[i].info[j].lcount +" lectures</a></div></td>");
-                */
             }
             tdata+="</tr>";
         }
@@ -136,17 +127,21 @@
             present += subjects[i].present;
             total  += subjects[i].total;
         }
+
         percent = (present*100/total).toFixed(1);
-        console.log(present);
-        console.log(total);
-        console.log(percent);
+        info = wholeData.info;
+        var dr = $(".detailsRow");
+        dr.find(".studentName").html(info.name);
+        dr.find(".rollno").html(info.rollno);
+        dr.find(".class").html(info.className);
+        dr.find(".classesTotal").html(total);
+        dr.find(".classesAttended").html(present);
+        dr.find(".classesPercent").html(percent);
+        dr.find(".studentRemarks").html(info.remarks);
+
+
         $("#studentTable thead tr:last-of-type").append(thdata);
-
-
         $("#studentTable tbody").html(tdata);
-        $("#studentTable .studentStatus").tooltip({
-            title: function(){ return $(this).data('time');}
-        });
         $("#studentTable").dataTable({
             paging : false,
             sDom: "t",
@@ -156,134 +151,19 @@
             } ]
 
         });
-        $("input[name=teacherToggle]").change(function(){
-            val = $(this).val();
-            if(val == 'showTeacher'){
-                $(".lcount").slideUp().fadeOut('slow');
-                $(".tname").slideDown('slow');
-            }
-            else if(val == 'showLcount'){
-                $(".lcount").slideDown('slow');
-                $(".tname").slideUp('slow');
-            } else {
-                $(".lcount").slideDown('slow');
-                $(".tname").slideDown('slow');
-            }
-
+        $("#studentTable .studentStatus").tooltip({
+            title: function(){ return $(this).data('time');}
         });
 
     }
-
-    function applyEffects(){
-
-        var tbody = $('#sheet tbody');
-        var highlightClass = 'info';
-
-        tbody.on( 'click', 'tr', function () {
-            api.$('tr.'+highlightClass).removeClass(highlightClass);
-            $(this).addClass(highlightClass);
-        }).on('click','td',function(){
-
-            var colIdx = api.cell(this).index().column;
-            var rowIdx = api.cell(this).index().row;
-            if(colIdx != null && rowIdx != null){
-                var columnSet = $(api.column(colIdx).nodes());
-                $(api.cells().nodes()).removeClass(highlightClass);
-                $(api.column(colIdx).nodes()).addClass(highlightClass);
-
-                //console.log($(this).css('color','white').css('backgroundColor','blue'));
-            }
-        });
-        $(".dataTables_filter input[type=search]").css('margin','0');
-    }
-
-
-    // show classes between rangestopper
-
-
-
 
 </script>
+<link rel="stylesheet" href="css/customize.css" />
 <style>
-    #sheet > thead > tr > th[class*="sort"]::after{display: none}
-    table.dataTable.table-condensed thead > tr > th {  padding-right: 5px;  }
-    body > .container{
-        width:auto;
-        margin:0;
-        padding:0;
-    }
-    #tableContainer{
-        padding:0 15px;
-        margin:0 -15px;
-    }
-    #sheet td, #sheet th{
-        font-size: 13px;
-        text-align:center;
-    }
     #sheet .nameRow{
         padding-left: 2.5%;
         text-align: left;
     }
-    .glyphicon-ok{
-        color:green;
-        font-size: 12px;
-    }
-    .glyphicon-remove{
-        color:red;
-        font-size: 12px;
-    }
-    a{
-        color:black;
-    }
-    .controlSearch,.controlPageLength{
-        margin-top:18px;
-    }
-    .controlsRow{
-        padding: 5px;
-        margin-bottom: -6px;
-        background: #556;
-    }
-    .custom-menu {
-        z-index:1000;
-        position: absolute;
-        background-color:#C0C0C0;
-        border: 1px solid black;
-        padding: 2px;
-    }
-    html{
-        overflow-x:hidden;
-    }
-    .headSubjectR{
-        font-size: 15px;
-        color: #cccccc;
-        padding: 10px 0;
-    }
-    .headSubjectR span{
-        font-weight: bold;
-    }
-    .mainHeading{
-        font-size: 25px;
-        text-align: center;
-    }
-    #tableContainer.noData{
-    //position: fixed;
-        bottom: 0;
-        padding: 20px;
-        color:red;
-
-    //height: 100%;
-        background: black;
-        width:100%;
-        margin:0;
-    }
-    .error{
-        top: 50%;
-    }
-
-
-
-
-
     .classname{
         font-weight: bold;
     }

@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="row" style="background:#08c;">
+    <div class="row headRow">
         <div class="container">
             <h1 class="mainHeading">ATTENDANCE</h1>
             <?php
@@ -18,9 +18,9 @@
             ?>
         </div>
     </div>
-    <div class="row headSubjectR" style="background:#08c;">
+    <div class="row detailsRow">
         <div class="container">
-            <div class="col-md-4 rightportion summaryData variableData">
+            <div class="col-md-4 switcher">
                 <div class="switch-toggle switch-3 well">
                     <input id="showTeacher" name="teacherToggle" type="radio" value="showTeacher" >
                     <label for="showTeacher">Teacher</label>
@@ -53,6 +53,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap.js"></script>
+<script src="js/custom.js"></script>
 <!-- js includes end -->
 </body>
 </html>
@@ -61,21 +62,6 @@
 var wholeData;
 var api;
 
-function formatTime(time){
-    var shortMonths= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var t = time.split(/[- :]/);
-    var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-    var dateString = shortMonths[t[1]-1] +" "+ t[2];
-    return dateString;
-}
-
-function formatTimeY(time){
-    var shortMonths= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var t = time.split(/[- :]/);
-    var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-    var dateString = t[2]+ " " + shortMonths[t[1]-1] +" "+ t[0];
-    return dateString;
-}
 
 $(document).ready(function(){
     var sem = $("#sem").html();
@@ -96,11 +82,7 @@ $(document).ready(function(){
             $("#classesTable > thead > tr:first-of-type").append(mainth);
             wholeData = result;
             loadData();
-
-            return;
-            loadSummary(totalAtt);
-            createRanger(lectureDates);
-        }
+       }
     });
 });
 
@@ -121,8 +103,15 @@ function loadData(){
     $("#classesTable tbody").hide().html(tdata).show('slow');
     $("#classesTable").dataTable({
         paging : false,
-        sDom: "t"
+        "sDom": "<'row controlsRow'<'col-md-4 controlPageLength'l><'col-md-4'<'dateRanger'>><'col-md-4 controlSearch'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        'language': {
+            search: '<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>',
+            searchPlaceholder: 'Search here',
+            lengthMenu: '<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>_MENU_</div>'
+        }
     });
+    $(".dataTables_filter input[type=search]").css('margin','0');
+    $(".dateRanger").html($('.switcher').html());
     $("input[name=teacherToggle]").change(function(){
         val = $(this).val();
         if(val == 'showTeacher'){
@@ -141,117 +130,10 @@ function loadData(){
 
 }
 
-function applyEffects(){
-
-    var tbody = $('#sheet tbody');
-    var highlightClass = 'info';
-
-    tbody.on( 'click', 'tr', function () {
-        api.$('tr.'+highlightClass).removeClass(highlightClass);
-        $(this).addClass(highlightClass);
-    }).on('click','td',function(){
-
-        var colIdx = api.cell(this).index().column;
-        var rowIdx = api.cell(this).index().row;
-        if(colIdx != null && rowIdx != null){
-            var columnSet = $(api.column(colIdx).nodes());
-            $(api.cells().nodes()).removeClass(highlightClass);
-            $(api.column(colIdx).nodes()).addClass(highlightClass);
-
-            //console.log($(this).css('color','white').css('backgroundColor','blue'));
-        }
-    });
-    $(".dataTables_filter input[type=search]").css('margin','0');
-}
-
-
-// show classes between rangestopper
-
-
 
 
 </script>
+<link href="css/customize.css" rel="stylesheet" />
 <style>
-    #sheet > thead > tr > th[class*="sort"]::after{display: none}
-    table.dataTable.table-condensed thead > tr > th {  padding-right: 5px;  }
-    body > .container{
-        width:auto;
-        margin:0;
-        padding:0;
-    }
-    #tableContainer{
-        padding:0 15px;
-        margin:0 -15px;
-    }
-    #sheet td, #sheet th{
-        font-size: 13px;
-        text-align:center;
-    }
-    #sheet .nameRow{
-        padding-left: 2.5%;
-        text-align: left;
-    }
-    .glyphicon-ok{
-        color:green;
-        font-size: 12px;
-    }
-    .glyphicon-remove{
-        color:red;
-        font-size: 12px;
-    }
-    a{
-        color:black;
-    }
-    .controlSearch,.controlPageLength{
-        margin-top:18px;
-    }
-    .controlsRow{
-        padding: 5px;
-        margin-bottom: -6px;
-        background: #556;
-    }
-    .custom-menu {
-        z-index:1000;
-        position: absolute;
-        background-color:#C0C0C0;
-        border: 1px solid black;
-        padding: 2px;
-    }
-    html{
-        overflow-x:hidden;
-    }
-    .headSubjectR{
-        font-size: 15px;
-        color: #cccccc;
-        padding: 10px 0;
-    }
-    .headSubjectR span{
-        font-weight: bold;
-    }
-    .mainHeading{
-        font-size: 25px;
-        text-align: center;
-    }
-    #tableContainer.noData{
-    //position: fixed;
-        bottom: 0;
-        padding: 20px;
-        color:red;
-
-    //height: 100%;
-        background: black;
-        width:100%;
-        margin:0;
-    }
-    .error{
-        top: 50%;
-    }
-
-
-
-
-
-    .classname{
-        font-weight: bold;
-    }
+.lcount{color: #666;}
 </style>

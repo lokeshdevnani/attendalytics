@@ -62,29 +62,18 @@
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.bootstrap.js"></script>
 <script src="js/ion.rangeSlider.min.js"></script>
+<script src="js/custom.js"></script>
 <!-- js includes end -->
+
+<link rel="stylesheet" href="css/customize.css" />
 </body>
 </html>
 
 <script>
     var wholeData;
     var api;
+    var classId = 0;
 
-    function formatTime(time){
-        var shortMonths= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        var t = time.split(/[- :]/);
-        var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-        var dateString = shortMonths[t[1]-1] +" "+ t[2];
-        return dateString;
-    }
-
-    function formatTimeY(time){
-        var shortMonths= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        var t = time.split(/[- :]/);
-        var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-        var dateString = t[2]+ " " + shortMonths[t[1]-1] +" "+ t[0];
-        return dateString;
-    }
 
     $(document).ready(function(){
         var Class = $("#class").html();
@@ -136,7 +125,7 @@
 
         $(".summaryData .className").html(s.className);
         $(".summaryData .subjectName").html(s.subjectName);
-        $(".summaryData .teacherName").html(s.teacherName);
+        $(".summaryData .teacherName").html("<a href='byteacher.php?teacher="+ s.teacherId+"'>"+s.teacherName+"</a>");
 
         $(".summaryData .fromDate").html(formatTimeY(fromDate));
         $(".summaryData .toDate").html(formatTimeY(toDate));
@@ -147,6 +136,7 @@
 
     function loadData(data){
         lectureCount = wholeData.lectureList.length;
+        classId = wholeData.summary.classId;
         var columns = [
             { data: 'roll' },
             { data: 'name',width:"25%",sClass:"nameRow" },
@@ -178,6 +168,12 @@
                 lengthMenu: '<div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>_MENU_</div>'
             },
             columnDefs : [
+                {
+                    "targets": 1,
+                    "render": function(data,type,row,meta){
+                        return "<a href='bystudent.php?class="+ classId +"&rollno=" + row.roll + "'>" + data + "</a>";
+                    }
+                },
                 {
                     "targets": 2,
                     "render": function(data,type,row,meta){
@@ -281,11 +277,6 @@
     function updateAttended(from,to){
         var myColumn = api.column(2);
         var newAttended = getUpdatedAttendedValues(from,to);
-        /*
-        nodes = myColumn.nodes().to$().each(function(index,value){
-            $(this).html(newAttended[index]);
-        });
-        */
         var presents = myColumn.nodes().to$();
         console.log(presents);
         $.each(newAttended,function(index,value){
@@ -315,92 +306,4 @@
         $(".summaryData.variableData .percentAttendance").html(percentAttendance);
 
     }
-
-
-// show classes between rangestopper
-
-
-
-
 </script>
-<style>
-    body > .container{
-        width:auto;
-        margin:0;
-        padding:0;
-    }
-    .headRow, .detailsRow{
-        background:#25253C;
-    }
-    table.dataTable.table-condensed thead > tr > th {  padding-right: 5px;  }
-
-    #sheet > thead > tr > th[class*="sort"]::after{display: none}
-
-    #tableContainer{
-        padding:0 15px;
-        margin:0 -15px;
-    }
-    #sheet td, #sheet th{
-        font-size: 13px;
-        text-align:center;
-    }
-    #sheet .nameRow{
-        padding-left: 2.5%;
-        text-align: left;
-    }
-    .glyphicon-ok{
-        color:green;
-        font-size: 12px;
-    }
-    .glyphicon-remove{
-        color:red;
-        font-size: 12px;
-    }
-    a{
-        color:black;
-    }
-    .controlSearch,.controlPageLength{
-        margin-top:18px;
-    }
-    .controlsRow{
-        padding: 5px;
-        margin-bottom: -6px;
-        background: #556;
-    }
-    .custom-menu {
-        z-index:1000;
-        position: absolute;
-        background-color:#C0C0C0;
-        border: 1px solid black;
-        padding: 2px;
-    }
-    html{
-        overflow-x:hidden;
-    }
-    .detailsRow{
-        font-size: 15px;
-        color: #cccccc;
-        padding: 10px 0;
-    }
-    .detailsRow span{
-        font-weight: bold;
-    }
-    .mainHeading{
-        font-size: 25px;
-        text-align: center;
-    }
-    #tableContainer.noData{
-        //position: fixed;
-        bottom: 0;
-        padding: 20px;
-        color:red;
-
-        //height: 100%;
-        background: black;
-        width:100%;
-        margin:0;
-    }
-    .error{
-        top: 50%;
-    }
-</style>

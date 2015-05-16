@@ -1,0 +1,75 @@
+html { overflow-x:hidden; }
+body > .container {
+    width:auto;
+    margin:0;
+    padding:0;
+}
+a{
+    color:inherit ;
+}
+.headRow, .detailsRow {
+    background:#25253C;
+    border-bottom: 1px solid #569;
+}
+.mainHeading{
+    font-size: 24px;
+    text-align: center;
+    color: white;
+}
+#tableContainer{
+    padding:0 15px;
+    margin:0 -15px;
+}
+
+table.dataTable {margin-top: 0 !important; }
+table.dataTable.table-condensed#sheet thead > tr > th {  padding-right: 5px;  }
+#sheet > thead > tr > th[class*="sort"]::after{display: none}
+
+
+.dataTable td, .dataTable th{
+    font-size: 13px;
+    text-align:center;
+}
+#sheet .nameRow{
+    padding-left: 2.5%;
+    text-align: left;
+}
+.glyphicon-ok{ color:green; font-size: 12px;}
+.glyphicon-remove{color:red;font-size: 12px;}
+
+.controlSearch,.controlPageLength{
+    margin-top:18px;
+}
+.controlsRow{
+    padding: 1px 5px 5px 5px;
+    background: #556;
+}
+.detailsRow{
+    font-size: 15px;
+    color: #cccccc;
+    padding: 10px 0;
+}
+.detailsRow span{
+    font-weight: bold;
+}
+#tableContainer.noData{
+//position: fixed;
+    bottom: 0;
+    padding: 20px;
+    color:red;
+
+//height: 100%;
+    background: black;
+    width:100%;
+    margin:0;
+}
+.error{
+    top: 50%;
+}
+.custom-menu {
+    z-index:1000;
+    position: absolute;
+    background-color:#C0C0C0;
+    border: 1px solid black;
+    padding: 2px;
+}

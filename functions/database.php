@@ -22,3 +22,6 @@ function pr($arr){
 function dje($str){
     die(json_encode(array("error"=>$str)));
 }
+function redir($str){
+    header("location: ".$str);
+}

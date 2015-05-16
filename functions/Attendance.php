@@ -120,19 +120,8 @@ class Attendance {
     }
 
     public function getSummary($classId,$subjectId){
-        $summary = array();
-        $q = $this->db->prepare("SELECT name FROM classes WHERE id = ?");
-        $q->execute(array($classId));
-        $summary['className'] = $q->fetch(PDO::FETCH_NUM,0)[0];
-
-        $q = $this->db->prepare("SELECT name FROM subjects WHERE id = ?");
-        $q->execute(array($subjectId));
-        $summary['subjectName'] = $q->fetch(PDO::FETCH_NUM,0)[0];
-
-        if($summary['className'] && $summary['subjectName']);else return null;
-        $summary['teacherName'] = "To be Coded !!";
-        //return $summary;
-        $query = $this->db->prepare("SELECT rollStart,rollEnd,s.name as subjectName,t.name as teacherName, c.name as className
+        $query = $this->db->prepare("SELECT s.name as subjectName,t.name as teacherName, c.name as className,
+          t.id as teacherId,s.id as subjectId,c.id as classId, rollStart,rollEnd
           FROM subjectteachers st
           JOIN (SELECT * FROM classes WHERE id = ?) c ON st.classId = c.id
           JOIN (SELECT * FROM subjects WHERE id = ?) s ON st.subjectId = s.id
@@ -141,10 +130,9 @@ class Attendance {
         $query->execute(array($classId,$subjectId));
         if($query->rowCount()){
             $sum = $query->fetch(PDO::FETCH_ASSOC);
+            return $sum;
         }
-
-        return $sum;
-        return $summary;
+        return null;
     }
 
     public function getLecturesCounts($classId){

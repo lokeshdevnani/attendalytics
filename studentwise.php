@@ -40,6 +40,7 @@ for($i=1;$i<count($lectures);$i++){
 
 
 //pr($dates);
+$json['info'] = $info;
 $json['subjects'] = $subjectNames;
 $json['dates'] = $dates;
 //echo "<script>console.log(";
