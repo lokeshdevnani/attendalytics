@@ -2,15 +2,17 @@
 
 require_once 'functions/database.php';
 require_once 'functions/Attendance.php';
+require_once 'functions/Auth.php';
 
 /*
  * Some validation to do now.
  *
  */
-$classId;
-$subjectId;
+$classId=0;
+$subjectId=0;
 
 $att = new Attendance($db);
+$auth = new Auth($db);
 $err = array();
 $result = array();
 $dateColumns = array();
@@ -18,16 +20,20 @@ $dateColumns = array();
 if( isset($_GET['classId']) && isset($_GET['subjectId']) && !empty($_GET['classId']) && !empty($_GET['subjectId'])){
     $classId = $_GET['classId'];
     $subjectId= $_GET['subjectId'];
-    if(is_numeric($classId) && is_numeric($subjectId)){
+    if(is_numeric($classId) && is_numeric($subjectId)) {
         $summary = $att->getSummary($classId,$subjectId);
         if(!$summary)
             $err['error'] = "Class or subject is incorrect";
-    } else{
+    } else {
         $err['error'] = "Invalid Data.";
     }
 } else {
     $err['error'] = "Sorry, No data recieved";
 }
+if(!empty($err)) die(json_encode($err));
+
+if(!$auth->isAllowed($classId,$subjectId))
+    $err['error'] = "Sorry, you are not allowed to view this attendance sheet";
 
 if(!empty($err)) die(json_encode($err));
 

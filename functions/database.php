@@ -16,6 +16,8 @@ try{
     exit;
 }
 
+session_start();
+
 function pr($arr){
     echo "<pre>",print_r($arr,1),"</pre>";
 }

@@ -11,9 +11,11 @@
         <div class="container">
             <h1 class="mainHeading">ATTENDANCE</h1>
             <?php
-            if(isset($_GET['sem']) && !empty($_GET['sem'])){
+            if(isset($_GET['sem']) && !empty($_GET['sem']) && isset($_GET['branch']) && !empty($_GET['branch'])){
                 $sem= $_GET['sem'];
+                $branch= $_GET['branch'];
                 echo "<span class=hidden id=sem>$sem</span>";
+                echo "<span class=hidden id=branch>$branch</span>";
             }
             ?>
         </div>
@@ -65,10 +67,11 @@ var api;
 
 $(document).ready(function(){
     var sem = $("#sem").html();
+    var branch = $("#branch").html();
     $.ajax({
         url: "classes.php",
         dataType : "json",
-        data: {'sem': sem},
+        data: {'sem': sem,'branch': branch},
         success : function(result){
             console.log(result);
             if(result.error){

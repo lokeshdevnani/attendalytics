@@ -145,9 +145,9 @@ class Attendance {
         $arr = $q->fetchAll(PDO::FETCH_ASSOC);
         return $arr;
     }
-    public function getAllClasses($sem){
-        $q = $this->db->prepare("SELECT id as classId,name FROM classes WHERE sem = ?");
-        $q->execute(array($sem));
+    public function getAllClasses($sem,$branch){
+        $q = $this->db->prepare("SELECT id as classId,name FROM classes WHERE sem = ? AND branch = ?");
+        $q->execute(array($sem,$branch));
         return $q->fetchAll(PDO::FETCH_ASSOC);
     }
 

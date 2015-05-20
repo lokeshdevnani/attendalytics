@@ -105,9 +105,10 @@
 
                 //return;
                 //done !! now just load the rows
+                //return;
                 wholeData = result;
-                loadData(result.data);
                 loadSummary(totalAtt);
+                loadData(result.data);
                 createRanger(lectureDates);
             }
         });
@@ -117,18 +118,24 @@
         var s = wholeData.summary;
         var totalStudents = wholeData.data.length;
         totalDates = wholeData.lectureList.length;
-        fromDate = wholeData.lectureList[0].time;
-        toDate = wholeData.lectureList[totalDates-1].time;
-        avgAttendancePerDay = totalAtt/totalDates;
-        var percent = avgAttendancePerDay/totalStudents * 100;
-        percent =  percent.toFixed(1);
+        if(totalDates>0){
+            fromDate = formatTimeY(wholeData.lectureList[0].time);
+            toDate = formatTimeY(wholeData.lectureList[totalDates-1].time);
+            avgAttendancePerDay = totalAtt/totalDates;
+            var percent = avgAttendancePerDay/totalStudents * 100;
+            percent =  percent.toFixed(1);
+        } else {
+            fromDate = "No lectures yet";
+            toDate = "No lectures yet";
+            percent = " - ";
+        }
 
         $(".summaryData .className").html(s.className);
         $(".summaryData .subjectName").html(s.subjectName);
         $(".summaryData .teacherName").html("<a href='byteacher.php?teacher="+ s.teacherId+"'>"+s.teacherName+"</a>");
 
-        $(".summaryData .fromDate").html(formatTimeY(fromDate));
-        $(".summaryData .toDate").html(formatTimeY(toDate));
+        $(".summaryData .fromDate").html(fromDate);
+        $(".summaryData .toDate").html(toDate);
         $(".summaryData .totalDates").html(totalDates);
         $(".summaryData .percentAttendance").html(percent);
 
@@ -225,7 +232,9 @@
         column.visible(show,false);
     }
     function createRanger(lectureDates){
-
+        if(lectureDates.length<2){
+            return;
+        }
         $("#dateRanger,.dateRanger").ionRangeSlider({
             type: "double",
             values: lectureDates,

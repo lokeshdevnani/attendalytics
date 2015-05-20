@@ -34,7 +34,6 @@ echo "<pre>",print_r($lectureList),"</pre>";
 <script>
     $(document).ready(function() {
         var columns = [
-            {"sTitle": "Label", "sClass" : "header1"},
             {"sTitle": "Type","sClass" : "header2"},
             {"sTitle": "Typed","sClass" : "header2"},
             {"sTitle": "Types","sClass" : "header2"},
