@@ -17,9 +17,16 @@ class Auth{
         }
         return false;
     }
-    public function isTeaching($teacherId,$classId,$subjectId){
+    public function isTeachingSubject($teacherId,$classId,$subjectId){
         $q = $this->db->prepare("SELECT id FROM subjectteachers WHERE classId= ? AND subjectId = ? AND teacherId = ?");
         $q->execute(array($classId,$subjectId,$teacherId));
+        if($q->rowCount()) return true;
+        return false;
+    }
+
+    public function isTeaching($teacherId,$classId){
+        $q = $this->db->prepare("SELECT id FROM subjectteachers WHERE classId= ? AND teacherId = ?");
+        $q->execute(array($classId,$teacherId));
         if($q->rowCount()) return true;
         return false;
     }
@@ -37,13 +44,53 @@ class Auth{
         $login = $this->isLogged();
         if(empty($login)) return false;
         if($login['type']=="superuser"){
-
+           return true;
         } else if($login['type'] == "HOD"){
             if($this->getBranch($classId)==$login['branch'])
                 return true;
             return false;
         } else if($login['type'] == "teacher"){
-            return $this->isTeaching($login['id'],$classId,$subjectId);
+            return $this->isTeachingSubject($login['id'],$classId,$subjectId);
+        }
+        return false;
+    }
+
+    public function isAllowedStudentwise($classId,$rollno){
+        $login = $this->isLogged();
+        if(empty($login)) return false;
+        if($login['type']=="superuser"){
+          return true;
+        } else if($login['type'] == "HOD"){
+            if($this->getBranch($classId)==$login['branch'])
+                return true;
+            return false;
+        } else if($login['type'] == "teacher"){
+            return $this->isTeaching($login['id'],$classId);
+        } else if($login['type'] == "student"){
+            return ($login["classId"]==$classId && $login["rollno"]==$rollno);
+        }
+        return false;
+    }
+
+    public function isAllowedTeacherwise($teacherId){
+        $login = $this->isLogged();
+        if(empty($login)) return false;
+        if($login['type']=="superuser"){
+            return true;
+        } else if($login['type'] == "HOD"){
+                return true;
+        } else if($login['type'] == "teacher"){
+            return ($login['id']==$teacherId);
+        }
+        return false;
+    }
+    public function isAllowedClasses($branch){
+        $login = $this->isLogged();
+        if(empty($login)) return false;
+        if($login['type']=="superuser"){
+            return true;
+        } else if($login['type']=="HOD"){
+            return ($login['branch'] == $branch);
         }
         return false;
     }

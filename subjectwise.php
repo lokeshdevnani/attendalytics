@@ -32,7 +32,8 @@ if( isset($_GET['classId']) && isset($_GET['subjectId']) && !empty($_GET['classI
 }
 if(!empty($err)) die(json_encode($err));
 
-if(!$auth->isAllowed($classId,$subjectId))
+$login = $auth->isLogged();
+if(!$login || !$auth->isAllowed($classId,$subjectId))
     $err['error'] = "Sorry, you are not allowed to view this attendance sheet";
 
 if(!empty($err)) die(json_encode($err));
@@ -67,7 +68,7 @@ for($i=0;$i<$totalStudents;$i++)
     $result[$i]  = $t;   // result for i'th student stored in $result array.
 }
 
-
+$json['login'] = $login;
 $json['summary'] = $summary;
 $json['data']= $result;
 $json['lectureList']= $lectureList;

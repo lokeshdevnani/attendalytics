@@ -8,10 +8,8 @@
 </head>
 <body>
 <div class="container">
-  <div class="row headRow">
-     <div class="container">
-        <h1 class="mainHeading">ATTENDANCE</h1>
          <?php
+         require_once 'functions/header.php';
             if(isset($_GET['class']) && isset($_GET['subject'])){
                 if(!empty($_GET['class']) && !empty ($_GET['subject'])){
                     $class = $_GET['class'];
@@ -21,8 +19,6 @@
                 }
             }
          ?>
-     </div>
-  </div>
   <div class="row detailsRow">
       <div class="container">
         <div class="col-md-4 leftportion summaryData">
@@ -60,6 +56,7 @@
 <!-- js includes -->
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script src="js/dataTables.bootstrap.js"></script>
 <script src="js/ion.rangeSlider.min.js"></script>
 <script src="js/custom.js"></script>
@@ -88,6 +85,7 @@
                 if(result.error){
                     $("#tableContainer").addClass('noData').html("<div class=error>"+result.error+"</div>");
                 }
+                showLoginInfo(result.login);
                 // adding the thead headers
                 var lectureDates = [];
                 var tr2data = "";

@@ -7,6 +7,21 @@ body > .container {
 a{
     color:inherit ;
 }
+.navbar-brand
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
+}
+nav.navbar{
+    margin-bottom: 0;
+    border:0;
+    border-radius:0;
+}
+
 .headRow, .detailsRow {
     background:#25253C;
     border-bottom: 1px solid #569;

@@ -9,7 +9,7 @@ class Attendance {
     }
 
     public function logInsertRequest($json){
-        echo $json."<br>";
+        //echo $json."<br>";
     }
     public function upload($classId,$subjectId,$teacherId,$time,$absentees){
         try{
@@ -201,7 +201,6 @@ class Attendance {
         ");
         $q->execute(array($teacherId));
         return $q->fetchAll(PDO::FETCH_ASSOC);
-
     }
 
 }

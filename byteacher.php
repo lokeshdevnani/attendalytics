@@ -7,17 +7,13 @@
 </head>
 <body>
 <div class="container">
-    <div class="row headRow">
-        <div class="container">
-            <h1 class="mainHeading">ATTENDANCE</h1>
             <?php
+            require 'functions/header.php';
             if(isset($_GET['teacher']) && !empty($_GET['teacher'])){
                 $teacherId = $_GET['teacher'];
                 echo "<span class='hidden' id='teacherId'>$teacherId</span>";
             }
             ?>
-        </div>
-    </div>
     <div class="row detailsRow">
         <div class="container">
             <div class="col-md-4 leftportion">
@@ -74,6 +70,8 @@
             data: {'teacher': teacherId},
             success : function(result){
                 console.log(result);
+                if(result.login)
+                    showLoginInfo(result.login);
                 if(result.error){
                     $("#tableContainer").addClass('noData').html("<div class=error>"+result.error+"</div>");
                     return;

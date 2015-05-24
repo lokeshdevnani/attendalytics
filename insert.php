@@ -16,7 +16,6 @@ if(isset($_REQUEST)){
 
 
             //validation ends
-            pr($att->getByLectureId(5));
 
 
             $absentees = explode(",",$absentees);

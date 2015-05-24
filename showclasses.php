@@ -7,10 +7,8 @@
 </head>
 <body>
 <div class="container">
-    <div class="row headRow">
-        <div class="container">
-            <h1 class="mainHeading">ATTENDANCE</h1>
             <?php
+            require 'functions/header.php';
             if(isset($_GET['sem']) && !empty($_GET['sem']) && isset($_GET['branch']) && !empty($_GET['branch'])){
                 $sem= $_GET['sem'];
                 $branch= $_GET['branch'];
@@ -18,7 +16,6 @@
                 echo "<span class=hidden id=branch>$branch</span>";
             }
             ?>
-        </div>
     </div>
     <div class="row detailsRow">
         <div class="container">

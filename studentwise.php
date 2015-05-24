@@ -1,8 +1,10 @@
 <?php
 require_once 'functions/database.php';
 require_once 'functions/Attendance.php';
+require_once 'functions/Auth.php';
 
 $att = new Attendance($db);
+$auth = new Auth($db);
 
 $classId = 0;
 $rollno = 0;
@@ -18,6 +20,12 @@ if(isset($_GET['class']) && !empty($_GET['class']) && is_numeric($_GET['class'])
 } else {
     dje("Student could not be found.");
 }
+
+$login = $auth->isLogged();
+if($login && $auth->isAllowedStudentwise($classId,$rollno));else
+    dje("Sorry, you are not allowed to view this record");
+
+
 
 $subjectNames = $att->getSubjectNames($classId);
 ($lectures = $att->studentReport($rollno,$classId));
@@ -40,6 +48,7 @@ for($i=1;$i<count($lectures);$i++){
 
 
 //pr($dates);
+$json['login'] = $login;
 $json['info'] = $info;
 $json['subjects'] = $subjectNames;
 $json['dates'] = $dates;

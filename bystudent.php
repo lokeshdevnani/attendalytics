@@ -7,10 +7,8 @@
 </head>
 <body>
 <div class="container">
-    <div class="row headRow">
-        <div class="container">
-            <h1 class="mainHeading">ATTENDANCE</h1>
             <?php
+            require 'functions/header.php';
             if(isset($_GET['rollno']) && !empty($_GET['class'])){
                 $class = $_GET['class'];
                 $rollno = $_GET['rollno'];
@@ -18,7 +16,6 @@
                 echo "<span class='hidden' id='rollno'>$rollno</span>";
             }
             ?>
-        </div>
     </div>
     <div class="row detailsRow">
         <div class="container">
@@ -77,9 +74,12 @@
             data: {'class': classId, 'rollno': rollno},
             success : function(result){
                 console.log(result);
+                if(result.login)
+                    showLoginInfo(result.login);
                 if(result.error){
                     $("#tableContainer").addClass('noData').html("<div class=error>"+result.error+"</div>");
                 }
+
                 var mainth;
                 $.each(result.subjects,function(index,subject){
                     mainth += ("<th><a data-id='" + subject.id + "'>" + subject.name + "</a></th>");

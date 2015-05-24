@@ -26,3 +26,15 @@ function getWeekDay(n){
         case 7: return "Saturday";
     }
 }
+
+function showLoginInfo(data){
+    console.log(data);
+    $("#acc_name").html("Hello, "+data.name+' <b class="caret"></b>');
+    var type = data.type;
+    if(type == "HOD")
+        $("#acc_type").html(data.type);
+    else if(type == "teacher")
+        $("#acc_type").html(data.type);
+    else
+        $("#acc_type").html(data.type);
+}
