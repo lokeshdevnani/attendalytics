@@ -35,52 +35,46 @@ if(isset($_POST['login']) && isset($_POST['username']) && isset($_POST['password
 pr($err);
 
 ?>
-    <div class="col-md-offset-4 col-md-4 loginbox">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 loginbox">
         <div class="loginContainer">
             <div class="loginInnerContainer">
                 <div class="login-image">
 
                 </div>
                 <div class="login-form">
-                    <form action="" method="post" class="form" role="form">
+                    <form action="" method="post" class="form" role="form" id="loginform">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input name="username" type="text" class="form-control" placeholder="Username">
+                            <input name="username" type="text" class="form-control" placeholder="Username" autocomplete="off">
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input name="password" type="text" class="form-control" placeholder="Password">
+                            <input name="password" type="password" class="form-control" placeholder="Password" autocomplete="off">
                         </div>
                         <div class="input-group" style="border: none;">
-                            <label class="login-type col-md-6"><input name="type" type="radio" value="Admin">HOD</label>
-                            <label class="login-type col-md-6 selected-type"><input name="type" type="radio" value="HOD" checked>Teacher</label></label>
+                            <label class="login-type col-md-6"><input name="type" type="radio" value="superuser">Admin</label>
+                            <label class="login-type col-md-6 selected-type"><input name="type" type="radio" value="hod" checked>HOD</label></label>
                             <label class="login-type col-md-6"><input name="type" type="radio" value="teacher">Teacher</label></label>
-                            <label class="login-type col-md-6"><input name="type" type="radio" value="student">Teacher</label></label>
+                            <label class="login-type col-md-6"><input name="type" type="radio" value="student">Student</label></label>
                             <div class="clearfix"></div>
                         </div>
                         <div class="text-center">
-                            <input type="submit" value="login" class="login-button" />
+                            <input id="login-button" type="submit" value="LOGIN" class="login-button" name="login" />
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-<form id="myform" method="post" class="">
-    <input type="text" name="username" placeholder="username">
-    <input type="text" name="password" placeholder="password">
-    <input type="radio" name="type" value="hod">
-    <input type="radio" name="type" value="teacher">
-    <input type="radio" name="type" value="student">
-    <input type="submit" value="login"name="login"  />
-</form>
+    <div class="col-md-4"></div>
 </div>
 <style>
     body{
         background: #25253C;
     }
     .loginbox{
-        height: 100%;
+        min-height: 100%;
         position: absolute;
         top:0;
     }
@@ -94,14 +88,14 @@ pr($err);
         padding: 15px;
     }
     .login-image{
-        height: 350px;
-        background: url("images/sort_both.png");
+        height: 300px;
+        background: url("images/logo.jpeg");
         background-size: 100%;
     }
     .login-form .input-group{
         padding: 5px;
         margin: 10px;
-        font-size: 20px;
+        font-size: 18px;
         color: white;
         border-bottom: 1px solid #888;
     }
@@ -123,9 +117,15 @@ pr($err);
         color: inherit;
     }
     .login-form label{
-        margin: 0;
         border: 1px solid #555;
         font-weight: normal;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        border-radius: 10px;
+        margin: 5px 2.5%;
+        width:45%;
+        font-size: 14px;
+        text-align: center;
     }
     .login-form input[type=radio]{
         display:none;
@@ -137,19 +137,44 @@ pr($err);
         background: #0088cc;
         font: inherit;
         width: 80%;
-        margin-top: 10px;
         padding: 10px 0;
         border-radius: 20px;
         color: white;
 
     }
+    .login-form .login-button-wait{
+        background-color: #00aa00;
+        color: white;
+        width: 80px;
+        border-radius: 40px;
+        transform: rotate(720deg);
+        transition: all 1s ease-in 0.2s;
+    }
+    pre{
+        display: none;
+
+    }
+    .loginbox{
+        position: static;
+    }
+
 </style>
-<script src="js/jquery.min.js">s</script>
+<script src="js/jquery.min.js"></script>
 <script>
     $(".login-type input").change(function(){
         $(".login-type").removeClass("selected-type");
         $(this).parent().addClass("selected-type");
     });
+    /*
+    $("#loginform").submit(function(e){
+        //e.preventDefault();
+        //e.submit();
+        $("#login-button")
+            //.removeClass("login-button")
+            .addClass( "login-button-wait");
+        //addClass("login-button-wait")
+    });
+    */
 </script>
 </body>
 </html>
