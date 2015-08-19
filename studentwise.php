@@ -21,7 +21,7 @@ if(isset($_GET['class']) && !empty($_GET['class']) && is_numeric($_GET['class'])
     dje("Student could not be found.");
 }
 
-$login = $auth->isLogged();
+$login = $auth->isOK();
 if($login && $auth->isAllowedStudentwise($classId,$rollno));else
     dje("Sorry, you are not allowed to view this record");
 

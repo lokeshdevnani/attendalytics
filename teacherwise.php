@@ -9,7 +9,7 @@ $teacherId = 0;
 $login = 0;
 if(isset($_GET['teacher']) && !empty($_GET['teacher']) && is_numeric($_GET['teacher'])){
     $teacherId = $_GET['teacher'];
-    $login = $auth->isLogged();
+    $login = $auth->isOK();
     if($login && $auth->isAllowedTeacherwise($teacherId));else
         dje("Sorry, you are not allowed to view this record");
 } else{

@@ -20,7 +20,7 @@
     <div class="row detailsRow">
         <div class="container">
             <div class="col-md-4 switcher">
-                <div class="switch-toggle switch-3 well">
+                <div class="switch-toggle switch-3 well" style="margin-bottom:0;">
                     <input id="showTeacher" name="teacherToggle" type="radio" value="showTeacher" >
                     <label for="showTeacher">Teacher</label>
 
@@ -30,7 +30,7 @@
                     <input id="showBoth" name="teacherToggle" type="radio" value="showBoth" checked>
                     <label for="showBoth">Both</label>
 
-                    <a class="btn btn-primary"></a>
+                    <a class="btn btn-primary btn-switcher-cover"></a>
                 </div>
             </div>
         </div>
@@ -71,6 +71,8 @@ $(document).ready(function(){
         data: {'sem': sem,'branch': branch},
         success : function(result){
             console.log(result);
+            if(result.login)
+                showLoginInfo(result.login);
             if(result.error){
                 $("#tableContainer").addClass('noData').html("<div class=error>"+result.error+"</div>");
             }
@@ -95,7 +97,7 @@ function loadData(){
         tdata += ("<td><a class=classname href='" + classes[i].classId+"'>" + classes[i].name + "</a></td>");
         for(j=0;j<subjects.length;j++){
             tdata += ("<td>" +
-                "<div><a class=tname href='" + classes[i].info[j].teacherId +"'>" + classes[i].info[j].teacherName + "</a></div>" +
+                "<div><a class=tname href='byteacher.php?teacher=" + classes[i].info[j].teacherId +"'>" + classes[i].info[j].teacherName + "</a></div>" +
                 "<div><a class=lcount href='show.php?class="+classes[i].classId+"&subject="+subjects[j].id+"'>"+ classes[i].info[j].lcount +" lectures</a></div></td>");
         }
         tdata+="</tr>";
@@ -112,6 +114,7 @@ function loadData(){
     });
     $(".dataTables_filter input[type=search]").css('margin','0');
     $(".dateRanger").html($('.switcher').html());
+    $('.switcher').html('');
     $("input[name=teacherToggle]").change(function(){
         val = $(this).val();
         if(val == 'showTeacher'){
@@ -136,4 +139,10 @@ function loadData(){
 <link href="css/customize.css" rel="stylesheet" />
 <style>
 .lcount{color: #666;}
+.controlsRow > .col-md-4{
+    margin-top: 10px;
+}
+    .btn-switcher-cover{
+        background-color: #BDBDBD;
+    }
 </style>

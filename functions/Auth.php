@@ -11,12 +11,46 @@ class Auth{
         return md5($str);
     }
 
-    public function isLogged(){
+    public function isLogged(){   // is login Session active
         if(isset($_SESSION['login'])){
             return $_SESSION['login'];
         }
         return false;
     }
+
+    public function isOK(){  // Checks if either session or token is validated and User is logged in.
+       $login = $this->isLogged();
+       if($login)
+           return $login;
+       if(isset($_REQUEST['token']) && $login = $this->isTokenValid($_REQUEST['token'])){
+           $_SESSION['login'] = $login;
+           return $login;
+       }
+       return false;
+    }
+
+    public function generateToken($datastring){
+        $token = str_shuffle(md5(str_shuffle($datastring)));
+        $q = $this->db->prepare("INSERT INTO tokens (datastring,token) VALUES(?,?)");
+        if($q->execute(array($datastring,$token)))
+            return $token;
+        return false;
+    }
+
+
+    public function isTokenValid($token){
+        $q = $this->db->prepare("SELECT datastring FROM tokens WHERE token = ? LIMIT 1");
+        $q->execute(array($token));
+        if($q->rowCount()){
+            // get the datastring and set the session with the data after json_decoding it.
+            $datastring = $q->fetchColumn(0);
+            $login = json_decode($datastring,true);
+            $_SESSION['login']= $login;
+            return $login;
+        }
+        return false;
+    }
+
     public function isTeachingSubject($teacherId,$classId,$subjectId){
         $q = $this->db->prepare("SELECT id FROM subjectteachers WHERE classId= ? AND subjectId = ? AND teacherId = ?");
         $q->execute(array($classId,$subjectId,$teacherId));

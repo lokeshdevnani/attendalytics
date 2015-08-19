@@ -14,7 +14,6 @@ if(isset($_REQUEST)){
             //validation
             /* CHECK FOR ABSENTEE ARRAY(SORT) AND DUPLICACY ISSUE*/
 
-
             //validation ends
 
 

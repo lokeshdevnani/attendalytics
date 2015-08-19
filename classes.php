@@ -16,7 +16,7 @@ $classes = $att->getAllClasses($sem,$branch);
 
 if(empty($classes)) dje("Please specify a correct sem and branch");
 
-$login = $auth->isLogged();
+$login = $auth->isOK();
 if(!$login || !$auth->isAllowedClasses($branch))
     dje("Sorry, you are not allowed to view this record");
 
@@ -24,6 +24,7 @@ $subjects = $att->getSubjectNames($classes[0]['classId']);
 foreach($classes as $classIndex=>$class){
     $classes[$classIndex]['info'] =$att->getLecturesCounts($class['classId']);
 }
+$json['login'] =  $login;
 $json['subjects'] = $subjects;
 $json['classes'] = $classes;
 die(json_encode($json));

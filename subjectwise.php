@@ -32,7 +32,8 @@ if( isset($_GET['classId']) && isset($_GET['subjectId']) && !empty($_GET['classI
 }
 if(!empty($err)) die(json_encode($err));
 
-$login = $auth->isLogged();
+$login = $auth->isOK();
+
 if(!$login || !$auth->isAllowed($classId,$subjectId))
     $err['error'] = "Sorry, you are not allowed to view this attendance sheet";
 
