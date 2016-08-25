@@ -69,7 +69,7 @@
         var classId = $("#class").html();
         var rollno = $("#rollno").html();
         $.ajax({
-            url: "studentwise.php",
+            url: "api/studentwise.php",
             dataType : "json",
             data: {'class': classId, 'rollno': rollno},
             success : function(result){

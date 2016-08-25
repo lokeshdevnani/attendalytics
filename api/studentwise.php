@@ -1,4 +1,5 @@
 <?php
+
 require_once 'functions/database.php';
 require_once 'functions/Attendance.php';
 require_once 'functions/Auth.php';

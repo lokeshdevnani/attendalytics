@@ -66,7 +66,7 @@ $(document).ready(function(){
     var sem = $("#sem").html();
     var branch = $("#branch").html();
     $.ajax({
-        url: "classes.php",
+        url: "api/classes.php",
         dataType : "json",
         data: {'sem': sem,'branch': branch},
         success : function(result){

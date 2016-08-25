@@ -8,8 +8,8 @@ require_once 'functions/Auth.php';
  * returns this key using json output data)
  * when the token sent with any request is given to a API file, it checks whether the session is set,
  * if not token is provided or not, if provided, checks whether its valid or not. If it is , sets session with the token data.
- *
  */
+
 $_POST = $_REQUEST;
 $att = new Attendance($db);
 $auth = new Auth($db);
@@ -36,12 +36,12 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['type
     if(!empty($_POST['username']) && ($_POST['password']!="") && !empty($_POST['type'])){
         $login = $auth->login($_POST['username'],$_POST['password'],$_POST['type']);
         if(!empty($login)){
-            $datastring = json_encode($login);
-            $token = $auth->generateToken($datastring);
-            $json['info'] = $login;
-            $json['status'] = true;
-            $json['token'] = $token;
-            die(json_encode($json));
+            $token = $auth->generateToken(json_encode($login));
+            die(json_encode(array(
+              'info'    => $login,
+              'status'  => true,
+              'token'   => $token
+            )));
         } else {
             $err = "Access Denied! Invalid username password combination";
         }
@@ -52,5 +52,3 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['type
 $json['status'] = false;
 $json['error'] = $err;
 die(json_encode($json));
-
-

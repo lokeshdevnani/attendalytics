@@ -1,3 +1,6 @@
+<?php
+
+?>
 <!doctype html>
 <html>
 <head>
@@ -5,36 +8,6 @@
 </head>
 <body>
 <div class="container-fluid">
-<?php
-require_once 'functions/database.php';
-require_once 'functions/Attendance.php';
-require_once 'functions/Auth.php';
-
-$auth = new Auth($db);
-$loggedAs = $auth->isLogged();
-if($loggedAs){
-    echo "Logged in as ".$loggedAs['type']." (".$loggedAs['name'].")";
-    echo "<a href='logout.php'>Logout</a>";
-    die();
-}
-$err = array();
-if(isset($_POST['login']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['type'])){
-    if(!empty($_POST['username']) && ($_POST['password']!="") && !empty($_POST['type'])){
-        echo "GOT ya";
-        $x = $auth->login($_POST['username'],$_POST['password'],$_POST['type']);
-        if(!empty($x)){
-            pr($x);
-            die();
-        } else {
-            $err[] = "Access Denied! Invalid username password combination";
-        }
-    } else $err[] = "Enter your login credentials to continue";
-} else {
-    $err[] = "Please enter username and password";
-}
-pr($err);
-
-?>
     <div class="col-md-4"></div>
     <div class="col-md-4 loginbox">
         <div class="loginContainer">
@@ -58,6 +31,9 @@ pr($err);
                             <label class="login-type col-md-6"><input name="type" type="radio" value="teacher">Teacher</label></label>
                             <label class="login-type col-md-6"><input name="type" type="radio" value="student">Student</label></label>
                             <div class="clearfix"></div>
+                        </div>
+                        <div class="text-center error-message">
+
                         </div>
                         <div class="text-center">
                             <input id="login-button" type="submit" value="LOGIN" class="login-button" name="login" />
@@ -150,6 +126,10 @@ pr($err);
         transform: rotate(720deg);
         transition: all 1s ease-in 0.2s;
     }
+    .error-message{
+      color: red;
+      margin: 0 0 15px 0;
+    }
     pre{
         display: none;
 
@@ -165,16 +145,24 @@ pr($err);
         $(".login-type").removeClass("selected-type");
         $(this).parent().addClass("selected-type");
     });
-    /*
+
     $("#loginform").submit(function(e){
-        //e.preventDefault();
-        //e.submit();
-        $("#login-button")
-            //.removeClass("login-button")
-            .addClass( "login-button-wait");
-        //addClass("login-button-wait")
+        e.preventDefault();
+        params = $(this).serialize();
+        $.ajax({
+            url: "api/login.php",
+            dataType : "json",
+            data: params,
+            success : function(result){
+              if(result.status && result.status == true) {
+                location = 'dashboard.php'
+              } else {
+                $(".error-message").html(result.error);
+              }
+            }
+        });
     });
-    */
+
 </script>
 </body>
 </html>

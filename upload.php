@@ -165,7 +165,7 @@
         /*
         var teacherId = $("#teacherId").html();
         $.ajax({
-            url: "teacherwise.php",
+            url: "api/teacherwise.php",
             dataType : "json",
             data: {'teacher': teacherId},
             success : function(result){

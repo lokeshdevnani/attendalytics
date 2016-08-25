@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors',1);
+
 $db_host       = "127.0.0.1";
 $db_name       = "attendance";
 $db_user       = "root";

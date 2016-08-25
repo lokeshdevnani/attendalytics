@@ -112,11 +112,18 @@ class Attendance {
         return $lectureList;
    }
 
+   public function getClassStudents($classId){
+       $q = $this->db->prepare("SELECT name,rollno,gender FROM students WHERE classId = ?");
+       $q->execute(array($classId));
+       $students = $q->fetchAll(PDO::FETCH_OBJ);
+       return $students;
+   }
+
     public function getStudentNames($classId){
         $q = $this->db->prepare("SELECT name FROM students WHERE classId = ?");
         $q->execute(array($classId));
-        $lectureList = $q->fetchAll(PDO::FETCH_COLUMN,"name");
-        return $lectureList;
+        $students = $q->fetchAll(PDO::FETCH_COLUMN,"name");
+        return $students;
     }
 
     public function getSummary($classId,$subjectId){
@@ -148,6 +155,12 @@ class Attendance {
     public function getAllClasses($sem,$branch){
         $q = $this->db->prepare("SELECT id as classId,name FROM classes WHERE sem = ? AND branch = ?");
         $q->execute(array($sem,$branch));
+        return $q->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getWholeClassList(){
+        $q = $this->db->prepare("SELECT id as classId,name FROM classes");
+        $q->execute(array());
         return $q->fetchAll(PDO::FETCH_ASSOC);
     }
 

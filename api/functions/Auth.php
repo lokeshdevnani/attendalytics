@@ -129,6 +129,19 @@ class Auth{
         return false;
     }
 
+    public function isAllowedList(){
+      $login = $this->isLogged();
+      if(empty($login)) return false;
+      if($login['type']=="superuser"){
+          return true;
+      } else if($login['type']=="HOD"){
+          return true;
+      }  else if($login['type'] == "teacher"){
+          return true;
+      }
+      return false;
+    }
+
     public function loginHOD($username,$password){
        $q = $this->db->prepare("SELECT id,name,branch FROM hods WHERE username = ? and password = ? LIMIT 1");
        $q->execute(array($username,$password));
@@ -185,13 +198,5 @@ class Auth{
         else if($type=='teacher')return $this->loginTeacher($username,$password);
         else if ($type=='student')return $this->loginStudent($username,$password);
         else return false;
-
-        return;
-            if($remember == true){
-                $cookie_time = 60*60*24*7;
-                setcookie('username',$username,time()+$cookie_time);
-                setcookie('password',$password,time()+$cookie_time);
-            }
-        return false;
     }
 }

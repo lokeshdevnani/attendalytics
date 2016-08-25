@@ -47,7 +47,6 @@
                 <th rowspan="2">Present</th>
             </tr>
             <tr>
-
             </tr>
         </thead>
      </table>
@@ -71,13 +70,12 @@
     var api;
     var classId = 0;
 
-
     $(document).ready(function(){
         var Class = $("#class").html();
         var subject = $("#subject").html();
         var params = {classId: Class, subjectId: subject};
         $.ajax({
-            url: "subjectwise.php",
+            url: "api/subjectwise.php",
             dataType : "json",
             data: params,
             success : function(result){
