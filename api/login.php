@@ -8,7 +8,7 @@ require_once 'functions/Auth.php';
  * returns this key using json output data)
  * when the token sent with any request is given to a API file, it checks whether the session is set,
  * if not token is provided or not, if provided, checks whether its valid or not. If it is , sets session with the token data.
- */
+*/
 
 $_POST = $_REQUEST;
 $att = new Attendance($db);

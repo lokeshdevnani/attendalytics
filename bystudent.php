@@ -64,7 +64,6 @@
     var wholeData;
     var api;
 
-
     $(document).ready(function(){
         var classId = $("#class").html();
         var rollno = $("#rollno").html();

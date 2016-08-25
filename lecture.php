@@ -1,5 +1,5 @@
 <?php
-require_once 'functions/database.php';
+require_once 'api/functions/database.php';
 
 if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])){
     $id = $_GET['id'];
