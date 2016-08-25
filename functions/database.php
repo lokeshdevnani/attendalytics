@@ -1,8 +1,8 @@
 <?php
 $db_host       = "127.0.0.1";
 $db_name       = "attendance";
-$db_user       = "Lokesh";
-$db_pass       = "password";
+$db_user       = "root";
+$db_pass       = "lokesh";
 try{
     $db = new PDO(
         "mysql:host={$db_host};dbname={$db_name}",
