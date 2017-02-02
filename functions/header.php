@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
 <nav class="navbar navbar-default headRow" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -9,14 +10,14 @@
         </button>
 
     </div>
-    <a class="navbar-brand" href="#">ATTENDANCE</a>
+    <a class="navbar-brand" href="dashboard.php">ATTENDANCE PORTAL</a>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
 
-        <ul class="nav navbar-nav navbar-left">
+        <!-- <ul class="nav navbar-nav navbar-left">
             <li><a href="#">&lt;</a></li>
             <li><a href="#">Home</a></li>
-        </ul>
+        </ul> -->
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#" id="acc_type">Login</a></li>
             <li class="dropdown">

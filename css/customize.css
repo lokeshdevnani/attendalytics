@@ -1,4 +1,7 @@
 html { overflow-x:hidden; }
+body {
+  font-family: "Droid Sans","Helvetica";
+}
 body > .container {
     width:auto;
     margin:0;
@@ -7,14 +10,14 @@ body > .container {
 a{
     color:inherit ;
 }
-.navbar-brand
-{
+.navbar-brand{
     position: absolute;
     width: 100%;
     left: 0;
     top: 0;
     text-align: center;
     margin: auto;
+    font-weight: bold;
 }
 nav.navbar{
     margin-bottom: 0;
@@ -23,8 +26,8 @@ nav.navbar{
 }
 
 .headRow, .detailsRow {
-    background:#25253C;
-    border-bottom: 1px solid #569;
+    background: #00897b;
+    border-bottom: 1px solid #eee;
 }
 .mainHeading{
     font-size: 24px;
@@ -57,23 +60,26 @@ table.dataTable.table-condensed#sheet thead > tr > th {  padding-right: 5px;  }
 }
 .controlsRow{
     padding: 1px 5px 5px 5px;
-    background: #556;
+    background: #333;
 }
 .detailsRow{
     font-size: 15px;
-    color: #cccccc;
+    color: #eee;
     padding: 10px 0;
 }
 .detailsRow span{
     font-weight: bold;
+    color: white;
+}
+.detailsRow label{
+  font-weight: normal;
+  margin-right: 3px;
 }
 #tableContainer.noData{
-//position: fixed;
     bottom: 0;
     padding: 20px;
     color:red;
 
-//height: 100%;
     background: black;
     width:100%;
     margin:0;
@@ -87,4 +93,15 @@ table.dataTable.table-condensed#sheet thead > tr > th {  padding-right: 5px;  }
     background-color:#C0C0C0;
     border: 1px solid black;
     padding: 2px;
+}
+
+span.input-group-addon, .irs-to, .irs-from, .irs-bar{
+  background: #00897b;
+  color: white;
+}
+.pagination>li>a{
+  color: #00897b;
+}
+.navbar-header, .navbar-default .navbar-brand, span.input-group-addon, .navbar-brand, .navbar-default .navbar-nav>li>a {
+  color: white;
 }

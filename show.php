@@ -5,6 +5,8 @@
     <link href="css/dataTables.bootstrap.css" rel="stylesheet" />
     <link href="css/ion.rangeSlider.css" rel="stylesheet" />
     <link href="css/ion.rangeSlider.skinHTML5.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+
 </head>
 <body>
 <div class="container">

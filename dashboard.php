@@ -7,3 +7,4 @@ if(!$auth->isLogged()){
   redir('login.php');
 };
 ?>
+<a href="logout.php">Logout</a>

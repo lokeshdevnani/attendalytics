@@ -11,6 +11,7 @@ if($auth->isLogged()){
 <html>
 <head>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">
@@ -19,7 +20,10 @@ if($auth->isLogged()){
         <div class="loginContainer">
             <div class="loginInnerContainer">
                 <div class="login-image">
-
+                  <img src="images/jecrc.png" class="img-responsive"/>
+                </div>
+                <div class="main-heading">
+                    <h3>ATTENDANCE PORTAL</h3>
                 </div>
                 <div class="login-form">
                     <form action="" method="post" class="form" role="form" id="loginform">
@@ -53,32 +57,53 @@ if($auth->isLogged()){
 </div>
 <style>
     body{
-        background: #25253C;
+        background: #444;
+        background: url(images/background.png);
+        font-family: "Droid Sans", "Helvetica", Arial;
+
+    }
+    body .container-fluid{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: rgba(0,0,0, 0.7);
     }
     .loginbox{
-        min-height: 100%;
-        position: absolute;
-        top:0;
+        position: static;
+        display: flex;
+        align-items: center;
     }
+
     .loginContainer{
         height: 100%;
-        background: linear-gradient(to bottom, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+        background: white;
         margin: 0 auto;
         width: 350px;
+        box-shadow: 5px 5px 30px 1px black;
     }
     .loginInnerContainer{
         padding: 15px;
     }
     .login-image{
-        height: 300px;
-        background: url("images/logo.jpeg");
-        background-size: 100%;
+        margin: 2em 1em;
+    }
+    .main-heading {
+        text-align: center;
+        margin: 2em -15px;
+        padding: 1em 0;
+        background: #00897b;
+        color: white;
+    }
+    .main-heading h3{
+      margin: 0;
     }
     .login-form .input-group{
         padding: 5px;
         margin: 10px;
         font-size: 18px;
-        color: white;
+        color: #444;
         border-bottom: 1px solid #888;
     }
     .login-form input{
@@ -99,30 +124,31 @@ if($auth->isLogged()){
         color: inherit;
     }
     .login-form label{
-        border: 1px solid #555;
+        border: 1px solid #444;
         font-weight: normal;
         padding-top: 4px;
         padding-bottom: 4px;
-        border-radius: 10px;
+        border-radius: 20px;
         margin: 5px 2.5%;
         width:45%;
         font-size: 14px;
         text-align: center;
+        color: #00897b;
     }
     .login-form input[type=radio]{
         display:none;
     }
     .selected-type{
-        background: #555;
+        background: #444;
+        color: white!important;
     }
     .login-form .login-button{
-        background: #0088cc;
+        background: #00897b;
         font: inherit;
         width: 80%;
         padding: 10px 0;
         border-radius: 20px;
         color: white;
-
     }
     .login-form .login-button-wait{
         background-color: #00aa00;
@@ -140,10 +166,6 @@ if($auth->isLogged()){
         display: none;
 
     }
-    .loginbox{
-        position: static;
-    }
-
 </style>
 <script src="js/jquery.min.js"></script>
 <script>
@@ -163,7 +185,7 @@ if($auth->isLogged()){
               if(result.status && result.status == true) {
                 location = 'dashboard.php'
               } else {
-                $(".error-message").html(result.error);
+                $(".error-message").hide().html(result.error).slideDown();
               }
             }
         });
