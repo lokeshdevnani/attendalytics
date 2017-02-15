@@ -17,7 +17,6 @@ class Attendance {
             VALUES(?,?,?,?,NOW()) ");
             $q1->execute(array($classId,$subjectId,$teacherId,$time));
             $lectureId = $this->db->lastInsertId();
-            echo $lectureId;
             if(!$lectureId) return false;
 
             $sql = array();
@@ -28,7 +27,7 @@ class Attendance {
             $sqlString = "INSERT INTO absentees (lectureId,rollno) VALUES ".implode(",",$sql);
             $q2 = $this->db->prepare($sqlString);
             $q2->execute();
-            return $q2->rowCount();
+            return $lectureId;
         }catch (Exception $e){
             echo $e->getMessage();
             return false;

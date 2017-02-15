@@ -128,6 +128,18 @@ class Auth{
         }
         return false;
     }
+    public function isAllowedToUpload(){
+        $login = $this->isLogged();
+        if(empty($login)) return false;
+        if($login['type']=="superuser"){
+            return true;
+        } else if($login['type'] == "HOD"){
+                return true;
+        } else if($login['type'] == "teacher"){
+            return true;
+        }
+        return false;
+    }
 
     public function isAllowedList(){
       $login = $this->isLogged();
