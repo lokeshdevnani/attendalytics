@@ -1,4 +1,0 @@
-edit the show.txt UI to handle the ajax data manually instead of letting it handled by dataTables
-
-#fa605f
-#162345
