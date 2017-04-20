@@ -68,21 +68,6 @@ if(!$auth->isLogged()){
       </div>
     </div>
   </div>
-  
-  <div class="table-responsive" id="tableContainer">
-     <table class="table table-bordered table-condensed table-hover" cellspacing="0" width="100%" id="sheet">
-        <thead>
-            <tr>
-            <a href="logout.php">Logout</a>
-                <th rowspan="2"><i class="glyphicon glyphicon-chevron-down"></i></th>
-                <th rowspan="2">Name</th>
-                <th rowspan="2">Present</th>
-            </tr>
-            <tr>
-            </tr>
-        </thead>
-     </table>
-  </div>
 </div>
 <!-- js includes -->
 <script src="js/jquery.min.js"></script>
@@ -175,48 +160,6 @@ if(!$auth->isLogged()){
           return false;
         });
       });
-        
-
-
-
-
-        var Class = $("#class").html();
-        var subject = $("#subject").html();
-        var params = {classId: Class, subjectId: subject};
-        $.ajax({
-            url: "api/list.php",
-            dataType : "json",
-            data: params,
-            success : function(result){
-                console.log(result);
-                if(result.error){
-                    $("#tableContainer").addClass('noData').html("<div class=error>"+result.error+"</div>");
-                }
-                showLoginInfo(result.login);
-                // adding the thead headers
-                var lectureDates = [];
-                var tr2data = "";
-                var tr3data = "";
-                var totalAtt=0;
-                $.each(result.lectureList,function(index,lecture){
-
-                    tr2data += ("<th><a data-id='" + lecture.id + "'>" + formatTime(lecture.time)+" " + "</a></th>");
-                    tr3data += ("<th><a>" +lecture.present+ "</a></th>");
-                    lectureDates.push(formatTime(lecture.time));
-                    totalAtt += lecture.present;
-                });
-                $("#sheet > thead > tr:first-of-type").append(tr2data);
-                $("#sheet > thead > tr:nth-of-type(2)").html(tr3data);
-
-                //return;
-                //done !! now just load the rows
-                //return;
-                wholeData = result;
-                loadSummary(totalAtt);
-                loadData(result.data);
-                createRanger(lectureDates);
-            }
-        });
     });
 
 </script>
